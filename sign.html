@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<title>Tanna Dental Login</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#000f22",
+        "secondary": "#605a7c",
+        "secondary-container": "#ded5fd",
+        "surface": "#f8f9fc",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-high": "#e7e8eb",
+        "surface-container-highest": "#e1e2e5",
+        "on-surface": "#191c1e",
+        "on-surface-variant": "#43474d",
+        "outline-variant": "#c4c6ce",
+        "error-container": "#ffdad6",
+        "on-error-container": "#93000a",
+        "on-primary": "#ffffff"
+      },
+
+      spacing: {
+        "margin-mobile": "16px",
+        "margin-desktop": "64px",
+        "section-gap": "120px"
+      },
+
+      fontFamily: {
+        "headline": ["Manrope", "sans-serif"],
+        "body": ["Inter", "sans-serif"]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+
+.login-card-shadow {
+  box-shadow: 0px 4px 20px rgba(10, 37, 64, 0.08);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+</style>
+
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen font-body">
+
+<!-- NAVBAR -->
+<header class="w-full bg-white border-b border-surface-container-highest">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop h-20 flex items-center justify-between">
+
+    <div class="flex items-center gap-3 cursor-pointer"
+      onclick="window.location.href='dashboard.html'">
+
+      <div class="w-11 h-11 rounded-full bg-secondary-container flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary text-[24px]">
+          dentistry
+        </span>
+      </div>
+
+      <div>
+        <h1 class="font-headline text-xl font-bold text-primary">
+          Tanna Dental
+        </h1>
+
+        <p class="text-xs text-on-surface-variant">
+          Admin Portal
+        </p>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="min-h-[calc(100vh-80px)] flex items-center justify-center px-margin-mobile md:px-margin-desktop py-12">
+
+  <div class="w-full max-w-[480px] bg-white rounded-2xl border border-surface-container-highest p-8 md:p-12 login-card-shadow">
+
+    <!-- ICON -->
+    <div class="text-center mb-10">
+
+      <div class="w-20 h-20 rounded-full bg-secondary-container flex items-center justify-center mx-auto mb-6">
+        <span class="material-symbols-outlined text-primary text-[38px]">
+          lock
+        </span>
+      </div>
+
+      <h2 class="font-headline text-3xl font-bold text-primary mb-2">
+        Welcome Back
+      </h2>
+
+      <p class="text-on-surface-variant">
+        Sign in to access admin dashboard
+      </p>
+
+    </div>
+
+    <!-- FORM -->
+    <form class="space-y-6"
+      onsubmit="event.preventDefault(); login();">
+
+      <!-- ERROR -->
+      <div id="errorMsg"
+        class="hidden bg-error-container text-on-error-container text-sm font-semibold px-4 py-3 rounded-xl">
+      </div>
+
+      <!-- EMAIL -->
+      <div>
+
+        <label
+          class="block text-sm font-semibold text-on-surface-variant mb-2"
+          for="email">
+
+          Email Address
+
+        </label>
+
+        <div class="relative">
+
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">
+            mail
+          </span>
+
+          <input
+            class="w-full h-12 pl-12 pr-4 rounded-xl border border-outline-variant bg-white focus:border-primary focus:ring-2 focus:ring-secondary-container outline-none transition-all"
+            id="email"
+            name="email"
+            placeholder="admin@tannadental.com"
+            type="email"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <!-- PASSWORD -->
+      <div>
+
+        <div class="flex items-center justify-between mb-2">
+
+          <label
+            class="block text-sm font-semibold text-on-surface-variant"
+            for="password">
+
+            Password
+
+          </label>
+
+          <a href="#"
+            class="text-sm text-secondary hover:text-primary transition-colors">
+
+            Forgot Password?
+
+          </a>
+
+        </div>
+
+        <div class="relative">
+
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">
+            lock
+          </span>
+
+          <input
+            class="w-full h-12 pl-12 pr-4 rounded-xl border border-outline-variant bg-white focus:border-primary focus:ring-2 focus:ring-secondary-container outline-none transition-all"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            type="password"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <!-- REMEMBER -->
+      <div class="flex items-center justify-between">
+
+        <label class="flex items-center gap-2 cursor-pointer">
+
+          <input
+            type="checkbox"
+            class="rounded border-outline-variant text-primary focus:ring-primary"/>
+
+          <span class="text-sm text-on-surface-variant">
+            Remember me
+          </span>
+
+        </label>
+
+      </div>
+
+      <!-- BUTTON -->
+      <button
+        id="loginBtn"
+        type="submit"
+        class="w-full h-12 rounded-xl bg-primary text-on-primary font-semibold flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+
+        <span>
+          Sign In
+        </span>
+
+        <span class="material-symbols-outlined text-[20px]">
+          login
+        </span>
+
+      </button>
+
+    </form>
+
+  </div>
+
+</main>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- YOUR FILES -->
+<script src="supabase.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

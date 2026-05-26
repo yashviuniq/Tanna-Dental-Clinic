@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#000f22",
+        "on-primary": "#ffffff",
+        "primary-container": "#0a2540",
+        "on-primary-container": "#768dad",
+        "secondary": "#605a7c",
+        "secondary-container": "#ded5fd",
+        "on-secondary-container": "#615b7c",
+        "surface": "#f8f9fc",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f2f3f6",
+        "surface-container": "#edeef1",
+        "surface-container-high": "#e7e8eb",
+        "surface-container-highest": "#e1e2e5",
+        "on-surface": "#191c1e",
+        "on-surface-variant": "#43474d",
+        "outline": "#74777e",
+        "outline-variant": "#c4c6ce",
+        "error": "#ba1a1a",
+        "error-container": "#ffdad6",
+        "on-error-container": "#93000a",
+        "primary-fixed": "#d2e4ff",
+        "primary-fixed-dim": "#b0c8eb",
+        "background": "#f8f9fc"
+      },
+      fontFamily: {
+        "sans": ["Inter", "sans-serif"],
+        "heading": ["Manrope", "sans-serif"]
+      }
+    }
+  }
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.card-shadow { box-shadow: 0px 4px 20px rgba(10, 37, 64, 0.06); }
+.sidebar-link { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; color: #43474d; transition: all 0.2s; cursor: pointer; }
+.sidebar-link:hover { background: #edeef1; color: #000f22; }
+.sidebar-link.active { background: #ded5fd; color: #000f22; }
+</style>
+<title>Tanna Dental — Admin Panel</title>
+</head>
+
+<body class="bg-surface text-on-surface font-sans min-h-screen" style="font-family: Inter, sans-serif;">
+
+<!-- Auth check -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script>
+  // Check if logged in
+  window.addEventListener('DOMContentLoaded', async () => {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) {
+      window.location.href = 'sign.html';
+    }
+  });
+</script>
+
+<div class="flex min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white border-r border-surface-container-highest flex flex-col hidden md:flex card-shadow" style="min-height:100vh;">
+    
+    <!-- Logo -->
+    <div class="p-6 border-b border-surface-container-highest">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-[20px]">dentistry</span>
+        </div>
+        <div>
+          <p class="font-heading font-bold text-primary text-sm">Tanna Dental</p>
+          <p class="text-on-surface-variant text-xs">Admin Panel</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav Links -->
+    <nav class="flex-1 p-4 space-y-1">
+      <div class="sidebar-link active" onclick="showSection('dashboard')">
+        <span class="material-symbols-outlined text-[20px]">dashboard</span>
+        Dashboard
+      </div>
+      <div class="sidebar-link" onclick="showSection('services')">
+        <span class="material-symbols-outlined text-[20px]">medical_services</span>
+        Services
+      </div>
+      <div class="sidebar-link" onclick="showSection('gallery')">
+        <span class="material-symbols-outlined text-[20px]">photo_library</span>
+        Gallery
+      </div>
+      <div class="sidebar-link" onclick="showSection('appointments')">
+        <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+        Appointments
+      </div>
+    </nav>
+
+    <!-- Logout -->
+    <div class="p-4 border-t border-surface-container-highest">
+      <button onclick="logout()" class="sidebar-link w-full text-error hover:bg-error-container">
+        <span class="material-symbols-outlined text-[20px]">logout</span>
+        Logout
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col">
+
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-surface-container-highest px-6 py-4 flex items-center justify-between card-shadow sticky top-0 z-40">
+      <div>
+        <h1 class="font-heading font-bold text-primary text-xl" id="pageTitle">Dashboard</h1>
+        <p class="text-on-surface-variant text-xs mt-0.5" id="pageSubtitle">Welcome back, Admin</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="dashboard.html" target="_blank" class="flex items-center gap-2 text-sm text-on-surface-variant hover:text-primary border border-outline-variant px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+          View Site
+        </a>
+        <button onclick="logout()" class="flex items-center gap-2 text-sm text-error hover:bg-error-container px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Sections -->
+    <div class="flex-1 p-6">
+
+      <!-- DASHBOARD SECTION -->
+      <div id="section-dashboard">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white rounded-2xl p-5 card-shadow border border-surface-container-highest">
+            <div class="w-10 h-10 bg-secondary-container rounded-xl flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-secondary text-[20px]">medical_services</span>
+            </div>
+            <p class="text-2xl font-heading font-bold text-primary" id="stat-services">—</p>
+            <p class="text-on-surface-variant text-xs mt-1 font-semibold uppercase tracking-wider">Total Services</p>
+          </div>
+          <div class="bg-white rounded-2xl p-5 card-shadow border border-surface-container-highest">
+            <div class="w-10 h-10 bg-primary-fixed rounded-xl flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-primary text-[20px]">photo_library</span>
+            </div>
+            <p class="text-2xl font-heading font-bold text-primary" id="stat-gallery">—</p>
+            <p class="text-on-surface-variant text-xs mt-1 font-semibold uppercase tracking-wider">Gallery Photos</p>
+          </div>
+          <div class="bg-white rounded-2xl p-5 card-shadow border border-surface-container-highest">
+            <div class="w-10 h-10 bg-surface-container rounded-xl flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-[20px]">calendar_month</span>
+            </div>
+            <p class="text-2xl font-heading font-bold text-primary" id="stat-appointments">—</p>
+            <p class="text-on-surface-variant text-xs mt-1 font-semibold uppercase tracking-wider">Appointments</p>
+          </div>
+          <div class="bg-white rounded-2xl p-5 card-shadow border border-surface-container-highest">
+            <div class="w-10 h-10 bg-surface-container-high rounded-xl flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-[20px]">pending</span>
+            </div>
+            <p class="text-2xl font-heading font-bold text-primary" id="stat-pending">—</p>
+            <p class="text-on-surface-variant text-xs mt-1 font-semibold uppercase tracking-wider">Pending</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 card-shadow border border-surface-container-highest">
+          <h2 class="font-heading font-bold text-primary mb-4">Quick Actions</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button onclick="showSection('services')" class="flex items-center gap-3 p-4 bg-surface-container-low hover:bg-secondary-container rounded-xl transition-colors text-left">
+              <span class="material-symbols-outlined text-secondary">add_circle</span>
+              <span class="font-semibold text-sm text-on-surface">Add New Service</span>
+            </button>
+            <button onclick="showSection('gallery')" class="flex items-center gap-3 p-4 bg-surface-container-low hover:bg-secondary-container rounded-xl transition-colors text-left">
+              <span class="material-symbols-outlined text-secondary">add_photo_alternate</span>
+              <span class="font-semibold text-sm text-on-surface">Upload Gallery Photo</span>
+            </button>
+            <button onclick="showSection('appointments')" class="flex items-center gap-3 p-4 bg-surface-container-low hover:bg-secondary-container rounded-xl transition-colors text-left">
+              <span class="material-symbols-outlined text-secondary">calendar_today</span>
+              <span class="font-semibold text-sm text-on-surface">View Appointments</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICES SECTION -->
+      <div id="section-services" class="hidden">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="font-heading font-bold text-primary text-lg">Manage Services</h2>
+            <p class="text-on-surface-variant text-sm mt-0.5">Add, edit or remove clinic services</p>
+          </div>
+          <button onclick="openServiceModal()" class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            Add Service
+          </button>
+        </div>
+
+        <!-- Services List -->
+        <div id="servicesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="text-center py-12 text-on-surface-variant col-span-3">
+            <span class="material-symbols-outlined text-[48px] opacity-30">medical_services</span>
+            <p class="mt-2 font-semibold">Loading services...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GALLERY SECTION -->
+      <div id="section-gallery" class="hidden">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="font-heading font-bold text-primary text-lg">Manage Gallery</h2>
+            <p class="text-on-surface-variant text-sm mt-0.5">Upload and manage clinic photos</p>
+          </div>
+          <button onclick="openGalleryModal()" class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
+            <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+            Upload Photo
+          </button>
+        </div>
+        <div id="galleryList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div class="text-center py-12 text-on-surface-variant col-span-4">
+            <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
+            <p class="mt-2 font-semibold">Loading gallery...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPOINTMENTS SECTION -->
+      <div id="section-appointments" class="hidden">
+        <div class="mb-6">
+          <h2 class="font-heading font-bold text-primary text-lg">Appointments</h2>
+          <p class="text-on-surface-variant text-sm mt-0.5">View and manage patient appointments</p>
+        </div>
+        <div class="bg-white rounded-2xl card-shadow border border-surface-container-highest overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-surface-container-low border-b border-surface-container-highest">
+                <tr>
+                  <th class="text-left px-4 py-3 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Patient</th>
+                  <th class="text-left px-4 py-3 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Service</th>
+                  <th class="text-left px-4 py-3 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Date</th>
+                  <th class="text-left px-4 py-3 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Status</th>
+                  <th class="text-left px-4 py-3 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Action</th>
+                </tr>
+              </thead>
+              <tbody id="appointmentsList">
+                <tr><td colspan="5" class="text-center py-12 text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[48px] opacity-30 block mx-auto">calendar_month</span>
+                  Loading appointments...
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- SERVICE MODAL -->
+<div id="serviceModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4" style="display:none;">
+  <div class="bg-white rounded-2xl w-full max-w-lg card-shadow">
+    <div class="flex items-center justify-between p-6 border-b border-surface-container-highest">
+      <h3 class="font-heading font-bold text-primary text-lg" id="serviceModalTitle">Add Service</h3>
+      <button onclick="closeServiceModal()" class="text-on-surface-variant hover:text-primary">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <input type="hidden" id="serviceId"/>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Service Title *</label>
+        <input id="serviceTitle" type="text" placeholder="e.g. Teeth Whitening"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Description</label>
+        <textarea id="serviceDesc" rows="3" placeholder="Describe the service..."
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm resize-none"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Price</label>
+        <input id="servicePrice" type="text" placeholder="e.g. From ₹2,000"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Service Image</label>
+        <input id="serviceImage" type="file" accept="image/*"
+          class="w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-secondary-container file:text-on-surface cursor-pointer"/>
+        <p class="text-xs text-on-surface-variant mt-1" id="currentImageNote"></p>
+      </div>
+      <div id="serviceError" class="hidden bg-error-container text-on-error-container text-sm font-semibold px-4 py-3 rounded-xl"></div>
+    </div>
+    <div class="p-6 pt-0 flex gap-3">
+      <button onclick="closeServiceModal()" class="flex-1 h-11 border border-outline-variant rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+      <button onclick="saveService()" id="saveServiceBtn" class="flex-1 h-11 bg-primary text-on-primary rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">Save Service</button>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY MODAL -->
+<div id="galleryModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4" style="display:none;">
+  <div class="bg-white rounded-2xl w-full max-w-md card-shadow">
+    <div class="flex items-center justify-between p-6 border-b border-surface-container-highest">
+      <h3 class="font-heading font-bold text-primary text-lg">Upload Gallery Photo</h3>
+      <button onclick="closeGalleryModal()" class="text-on-surface-variant hover:text-primary">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Select Photo *</label>
+        <input id="galleryImage" type="file" accept="image/*"
+          class="w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-secondary-container file:text-on-surface cursor-pointer"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Caption (optional)</label>
+        <input id="galleryCaption" type="text" placeholder="e.g. Modern Treatment Room"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div id="galleryError" class="hidden bg-error-container text-on-error-container text-sm font-semibold px-4 py-3 rounded-xl"></div>
+    </div>
+    <div class="p-6 pt-0 flex gap-3">
+      <button onclick="closeGalleryModal()" class="flex-1 h-11 border border-outline-variant rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+      <button onclick="saveGallery()" id="saveGalleryBtn" class="flex-1 h-11 bg-primary text-on-primary rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">Upload Photo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── NAVIGATION ───────────────────────────────────────────
+const sections = ['dashboard','services','gallery','appointments'];
+const titles = { dashboard:'Dashboard', services:'Services', gallery:'Gallery', appointments:'Appointments' };
+const subtitles = { dashboard:'Welcome back, Admin', services:'Manage your clinic services', gallery:'Manage clinic photos', appointments:'View patient appointments' };
+
+function showSection(name, trigger = null) {
+  sections.forEach(s => {
+    document.getElementById('section-'+s).classList.add('hidden');
+  });
+  document.getElementById('section-'+name).classList.remove('hidden');
+  document.getElementById('pageTitle').textContent = titles[name];
+  document.getElementById('pageSubtitle').textContent = subtitles[name];
+
+  // Update sidebar active
+  document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
+  const activeLink = trigger || document.querySelector(`.sidebar-link[onclick*="'${name}'"]`);
+  if (activeLink) activeLink.classList.add('active');
+
+  if (name === 'services') loadServices();
+  if (name === 'gallery') loadGallery();
+  if (name === 'appointments') loadAppointments();
+  if (name === 'dashboard') loadStats();
+}
+
+// ─── LOGOUT ───────────────────────────────────────────────
+async function logout() {
+  await supabaseClient.auth.signOut();
+  window.location.href = 'sign.html';
+}
+
+// ─── STATS ────────────────────────────────────────────────
+async function loadStats() {
+  const [s, g, a] = await Promise.all([
+    supabaseClient.from('services').select('id', { count:'exact', head:true }),
+    supabaseClient.from('gallery').select('id', { count:'exact', head:true }),
+    supabaseClient.from('appointments').select('id', { count:'exact', head:true }),
+  ]);
+  document.getElementById('stat-services').textContent = s.count ?? 0;
+  document.getElementById('stat-gallery').textContent = g.count ?? 0;
+  document.getElementById('stat-appointments').textContent = a.count ?? 0;
+
+  const pending = await supabaseClient.from('appointments').select('id', { count:'exact', head:true }).eq('status','pending');
+  document.getElementById('stat-pending').textContent = pending.count ?? 0;
+}
+
+// ─── SERVICES ─────────────────────────────────────────────
+async function loadServices() {
+  const { data, error } = await supabaseClient.from('services').select('*').order('display_order');
+  const el = document.getElementById('servicesList');
+  if (!data || data.length === 0) {
+    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant col-span-3">
+      <span class="material-symbols-outlined text-[48px] opacity-30">medical_services</span>
+      <p class="mt-2 font-semibold">No services yet</p>
+      <p class="text-sm opacity-70">Click "Add Service" to get started</p>
+    </div>`;
+    return;
+  }
+  el.innerHTML = data.map(s => `
+    <div class="bg-white rounded-2xl card-shadow border border-surface-container-highest overflow-hidden">
+      ${s.image_url ? `<img src="${s.image_url}" class="w-full h-40 object-cover"/>` : `<div class="w-full h-40 bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-[48px] text-on-surface-variant opacity-30">image</span></div>`}
+      <div class="p-4">
+        <h3 class="font-heading font-bold text-primary text-base mb-1">${escapeHtml(s.title)}</h3>
+        <p class="text-on-surface-variant text-sm mb-2 line-clamp-2">${escapeHtml(s.description || '')}</p>
+        ${s.price ? `<span class="inline-block bg-secondary-container text-on-secondary-container text-xs font-semibold px-2 py-1 rounded-full mb-3">${escapeHtml(s.price)}</span>` : ''}
+        <div class="flex gap-2 mt-2">
+          <button onclick="editService('${s.id}')" class="flex-1 text-xs font-semibold py-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">Edit</button>
+          <button onclick="deleteService('${s.id}')" class="flex-1 text-xs font-semibold py-2 border border-error-container text-error rounded-lg hover:bg-error-container transition-colors">Delete</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+let editingServiceId = null;
+
+function openServiceModal(service = null) {
+  editingServiceId = null;
+  document.getElementById('serviceId').value = '';
+  document.getElementById('serviceTitle').value = '';
+  document.getElementById('serviceDesc').value = '';
+  document.getElementById('servicePrice').value = '';
+  document.getElementById('serviceImage').value = '';
+  document.getElementById('currentImageNote').textContent = '';
+  document.getElementById('serviceModalTitle').textContent = 'Add Service';
+  document.getElementById('serviceError').classList.add('hidden');
+  document.getElementById('serviceModal').style.display = 'flex';
+}
+
+async function editService(id) {
+  const { data } = await supabaseClient.from('services').select('*').eq('id', id).single();
+  if (!data) return;
+  editingServiceId = id;
+  document.getElementById('serviceId').value = id;
+  document.getElementById('serviceTitle').value = data.title;
+  document.getElementById('serviceDesc').value = data.description || '';
+  document.getElementById('servicePrice').value = data.price || '';
+  document.getElementById('currentImageNote').textContent = data.image_url ? 'Current image exists. Upload new to replace.' : '';
+  document.getElementById('serviceModalTitle').textContent = 'Edit Service';
+  document.getElementById('serviceError').classList.add('hidden');
+  document.getElementById('serviceModal').style.display = 'flex';
+}
+
+function closeServiceModal() {
+  document.getElementById('serviceModal').style.display = 'none';
+}
+
+async function saveService() {
+  const title = document.getElementById('serviceTitle').value.trim();
+  const desc = document.getElementById('serviceDesc').value.trim();
+  const price = document.getElementById('servicePrice').value.trim();
+  const imageFile = document.getElementById('serviceImage').files[0];
+  const btn = document.getElementById('saveServiceBtn');
+  const errorEl = document.getElementById('serviceError');
+
+  if (!title) { showFormError(errorEl, 'Title is required.'); return; }
+  if (imageFile && !isValidImageFile(imageFile, errorEl)) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  errorEl.classList.add('hidden');
+
+  let image_url = null;
+
+  // Upload image if selected
+  if (imageFile) {
+    const fileName = buildStoragePath('services', imageFile);
+    const { data: uploadData, error: uploadError } = await supabaseClient.storage
+      .from('clinic-images').upload(fileName, imageFile, { upsert: true });
+    if (uploadError) { showFormError(errorEl, 'Image upload failed: ' + uploadError.message); btn.disabled=false; btn.textContent='Save Service'; return; }
+    const { data: urlData } = supabaseClient.storage.from('clinic-images').getPublicUrl(fileName);
+    image_url = urlData.publicUrl;
+  }
+
+  const payload = { title, description: desc, price };
+  if (image_url) payload.image_url = image_url;
+
+  let error;
+  if (editingServiceId) {
+    ({ error } = await supabaseClient.from('services').update(payload).eq('id', editingServiceId));
+  } else {
+    ({ error } = await supabaseClient.from('services').insert(payload));
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Save Service';
+
+  if (error) { showFormError(errorEl, error.message); return; }
+  closeServiceModal();
+  loadServices();
+  loadStats();
+}
+
+async function deleteService(id) {
+  if (!confirm('Delete this service?')) return;
+  await supabaseClient.from('services').delete().eq('id', id);
+  loadServices();
+  loadStats();
+}
+
+// ─── GALLERY ──────────────────────────────────────────────
+async function loadGallery() {
+  const { data } = await supabaseClient.from('gallery').select('*').order('display_order');
+  const el = document.getElementById('galleryList');
+  if (!data || data.length === 0) {
+    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant col-span-4">
+      <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
+      <p class="mt-2 font-semibold">No photos yet</p>
+      <p class="text-sm opacity-70">Click "Upload Photo" to add clinic images</p>
+    </div>`;
+    return;
+  }
+  el.innerHTML = data.map(g => `
+    <div class="relative group rounded-2xl overflow-hidden bg-surface-container aspect-square">
+      <img src="${g.image_url}" class="w-full h-full object-cover"/>
+      ${g.caption ? `<div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 font-semibold">${escapeHtml(g.caption)}</div>` : ''}
+      <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <button onclick="deleteGallery('${g.id}')" class="bg-white text-error px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-error-container transition-colors">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openGalleryModal() {
+  document.getElementById('galleryImage').value = '';
+  document.getElementById('galleryCaption').value = '';
+  document.getElementById('galleryError').classList.add('hidden');
+  document.getElementById('galleryModal').style.display = 'flex';
+}
+
+function closeGalleryModal() {
+  document.getElementById('galleryModal').style.display = 'none';
+}
+
+async function saveGallery() {
+  const imageFile = document.getElementById('galleryImage').files[0];
+  const caption = document.getElementById('galleryCaption').value.trim();
+  const btn = document.getElementById('saveGalleryBtn');
+  const errorEl = document.getElementById('galleryError');
+
+  if (!imageFile) { showFormError(errorEl, 'Please select an image.'); return; }
+  if (!isValidImageFile(imageFile, errorEl)) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Uploading...';
+  errorEl.classList.add('hidden');
+
+  const fileName = buildStoragePath('gallery', imageFile);
+  const { error: uploadError } = await supabaseClient.storage
+    .from('clinic-images').upload(fileName, imageFile, { upsert: true });
+
+  if (uploadError) { showFormError(errorEl, 'Upload failed: ' + uploadError.message); btn.disabled=false; btn.textContent='Upload Photo'; return; }
+
+  const { data: urlData } = supabaseClient.storage.from('clinic-images').getPublicUrl(fileName);
+  const { error } = await supabaseClient.from('gallery').insert({ image_url: urlData.publicUrl, caption });
+
+  btn.disabled = false;
+  btn.textContent = 'Upload Photo';
+
+  if (error) { showFormError(errorEl, error.message); return; }
+  closeGalleryModal();
+  loadGallery();
+  loadStats();
+}
+
+async function deleteGallery(id) {
+  if (!confirm('Delete this photo?')) return;
+  await supabaseClient.from('gallery').delete().eq('id', id);
+  loadGallery();
+  loadStats();
+}
+
+// ─── APPOINTMENTS ─────────────────────────────────────────
+async function loadAppointments() {
+  const { data } = await supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
+  const el = document.getElementById('appointmentsList');
+  if (!data || data.length === 0) {
+    el.innerHTML = `<tr><td colspan="5" class="text-center py-12 text-on-surface-variant">
+      <span class="material-symbols-outlined text-[48px] opacity-30 block mx-auto">calendar_month</span>
+      No appointments yet
+    </td></tr>`;
+    return;
+  }
+  el.innerHTML = data.map(a => `
+    <tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
+      <td class="px-4 py-3">
+        <p class="font-semibold text-on-surface">${a.name}</p>
+        <p class="text-xs text-on-surface-variant">${a.email}</p>
+      </td>
+      <td class="px-4 py-3 text-on-surface-variant">${a.service || '—'}</td>
+      <td class="px-4 py-3 text-on-surface-variant">${a.preferred_date || '—'}</td>
+      <td class="px-4 py-3">
+        <span class="px-2 py-1 rounded-full text-xs font-bold ${
+          a.status === 'confirmed' ? 'bg-green-100 text-green-800' :
+          a.status === 'cancelled' ? 'bg-error-container text-on-error-container' :
+          'bg-secondary-container text-on-secondary-container'
+        }">${a.status || 'pending'}</span>
+      </td>
+      <td class="px-4 py-3">
+        <select onchange="updateStatus('${a.id}', this.value)" class="text-xs border border-outline-variant rounded-lg px-2 py-1 outline-none">
+          <option ${a.status==='pending'?'selected':''}>pending</option>
+          <option ${a.status==='confirmed'?'selected':''}>confirmed</option>
+          <option ${a.status==='cancelled'?'selected':''}>cancelled</option>
+        </select>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function updateStatus(id, status) {
+  await supabaseClient.from('appointments').update({ status }).eq('id', id);
+  loadAppointments();
+}
+
+// ─── HELPERS ──────────────────────────────────────────────
+function showFormError(el, msg) {
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+
+function isValidImageFile(file, errorEl) {
+  const maxSize = 5 * 1024 * 1024;
+  if (!file.type.startsWith('image/')) {
+    showFormError(errorEl, 'Please choose a valid image file.');
+    return false;
+  }
+  if (file.size > maxSize) {
+    showFormError(errorEl, 'Image must be smaller than 5 MB.');
+    return false;
+  }
+  return true;
+}
+
+function buildStoragePath(folder, file) {
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+  const uniqueId = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  return `${folder}/${uniqueId}.${ext}`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+// Load stats on start
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(loadStats, 500);
+});
+</script>
+
+</body>
+</html>

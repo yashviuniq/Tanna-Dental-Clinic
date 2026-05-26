@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tanna Dental | Clinical Excellence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f8f9fc",
+                        "tertiary": "#060045",
+                        "surface-dim": "#d9dadd",
+                        "surface-tint": "#49607e",
+                        "on-tertiary-fixed": "#0f0069",
+                        "primary-fixed": "#d2e4ff",
+                        "on-tertiary-container": "#7f7bff",
+                        "tertiary-container": "#150082",
+                        "surface": "#f8f9fc",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e1e2e5",
+                        "inverse-primary": "#b0c8eb",
+                        "secondary-fixed": "#e6deff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e1e2e5",
+                        "secondary-fixed-dim": "#cac1e8",
+                        "primary-container": "#0a2540",
+                        "outline-variant": "#c4c6ce",
+                        "outline": "#74777e",
+                        "secondary": "#605a7c",
+                        "surface-container": "#edeef1",
+                        "primary": "#000f22",
+                        "background": "#f8f9fc",
+                        "surface-container-high": "#e7e8eb",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed-variant": "#484263",
+                        "surface-container-low": "#f2f3f6",
+                        "on-secondary-container": "#615b7c",
+                        "on-primary-fixed-variant": "#314865",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#ded5fd",
+                        "on-background": "#191c1e",
+                        "tertiary-fixed-dim": "#c3c0ff",
+                        "inverse-on-surface": "#f0f1f4",
+                        "tertiary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#001c37",
+                        "on-primary-container": "#768dad",
+                        "on-secondary-fixed": "#1c1735",
+                        "on-tertiary-fixed-variant": "#321ed2",
+                        "on-surface-variant": "#43474d",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#b0c8eb",
+                        "inverse-surface": "#2e3133"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .premium-shadow {
+            box-shadow: 0px 4px 20px rgba(10, 37, 64, 0.05);
+        }
+        .hero-gradient {
+            background: linear-gradient(to right, rgba(248, 249, 252, 0.95) 30%, rgba(248, 249, 252, 0.4) 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-sm h-20 transition-all duration-300">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-full">
+<div class="flex items-center gap-3">
+<img alt="Tanna Dental Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGQhBRZKMZ-rWj5MoTjsGsIBKl6zN78QLvBVY60anNvtGCQPIDCuwYGThnh3jGf4_D6cReRP0oaH5aBiNJ3gsiTu4aqN44sz3EmIlz_jHFyethtztYnZNm3MmB8djrxSTSrmGr1BQwiLkSJr00mSrlQAUy0_MBXOkSe4vYDSKVLc_QNMQTIfnX-3sA9lGwNX0IEYUxXngVFlBjm9MpDmIsb_8w1TG1SbTAsSrZUpOAa0rtz5Qq2F_ze5gV3T5W-TIWlI3IK91XPIo"/>
+<span class="text-headline-md font-headline-md font-bold text-primary">Tanna Dental</span>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-primary font-bold border-b-2 border-secondary font-label-md text-label-md py-1" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#">Treatments</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#">Our Team</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="sign.html">Patient Portal (Login)</a>
+</nav>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95" onclick="window.location.href='appointment.html'">
+                Book Appointment
+            </button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center pt-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A luxurious and ultra-modern dental clinic operatory with large windows, soft ambient lighting, and state-of-the-art equipment. The scene is clean, sterile, and calming, featuring a palette of whites and soft blues. High-key lighting creates a bright, welcoming boutique atmosphere that feels more like a high-end spa than a traditional medical office." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHp9dAi41hFBJuMe-dXE4wYXQci_VJ_LHS5ezLzpcigKKt9U-B68BtDA-pG5sWQjen2xd_lroNqCKmUgqpjKSln_vgOzx4UGA98HaE5Nnw9zSD-OBdW2Vq29i9OI3ekLwqn5nvYWZHsRTkW8-v9AYyv11kKrIiFC-U77yOHzXNl_3CCilkUnYnCUsE2wKuA6NIQzbrf_6LxCCMt6tZONvVFgxQqrscTTCGnaCGr30scNMpfnyPXXOyGV8GNCAy5pqwHKy32N_ldZE"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop w-full">
+<div class="max-w-2xl">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-md text-label-md mb-6">
+                    Welcome to Boutique Dentistry
+                </span>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-6 leading-tight">
+                    Redefining Your <br/><span class="text-secondary-fixed-dim">Dental Journey</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                    Experience a new standard of care led by Dr. Dinesh Tanna in a serene, boutique environment designed for your comfort and wellness.
+                </p>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-md text-label-md hover:opacity-90 transition-all flex items-center gap-2" onclick="window.location.href='appointment.html'">
+                        Book Appointment <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</button>
+<button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-full font-label-md text-label-md hover:bg-secondary-container/80 transition-all">
+                        View Services
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Highlights Section -->
+<section class="py-section-gap bg-surface-bright">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Highlight 1 -->
+<div class="bg-white p-10 rounded-xl premium-shadow border-t-4 border-secondary-container group hover:-translate-y-1 transition-transform duration-300">
+<div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[32px]">health_and_safety</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Expert Care</h3>
+<p class="text-on-surface-variant font-body-md">Clinical precision meet compassionate care under the expert guidance of Dr. Tanna and his elite medical team.</p>
+</div>
+<!-- Highlight 2 -->
+<div class="bg-white p-10 rounded-xl premium-shadow border-t-4 border-secondary-container group hover:-translate-y-1 transition-transform duration-300">
+<div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[32px]">spa</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Modern Sanctuary</h3>
+<p class="text-on-surface-variant font-body-md">Relax in a boutique environment meticulously designed to eliminate dental anxiety and promote total wellness.</p>
+</div>
+<!-- Highlight 3 -->
+<div class="bg-white p-10 rounded-xl premium-shadow border-t-4 border-secondary-container group hover:-translate-y-1 transition-transform duration-300">
+<div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[32px]">biotech</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Latest Technology</h3>
+<p class="text-on-surface-variant font-body-md">Utilizing cutting-edge 3D imaging and digital diagnostics to ensure the highest accuracy in every procedure.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div class="max-w-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">World-Class Services</h2>
+<p class="text-on-surface-variant font-body-lg">Comprehensive dental solutions tailored to your unique smile and overall health goals.</p>
+</div>
+<a class="text-primary font-bold font-label-md flex items-center gap-2 hover:text-secondary transition-colors" href="#">
+                    Explore All Treatments <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Service 1 - Bento Style -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-2xl h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A clean, minimalist image showing a professional dentist examining a patient's teeth in a high-tech bright clinic. The lighting is soft and airy, highlighting a sense of calm and precision. The color palette is dominated by whites, cool greys, and subtle purple accents, emphasizing medical professionalism and comfort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhW9Chx5r0mZ5-qZCA33BwOY1i2BR_HWlUqPddbbaF94HKgM-sdGdFlYAWBtonWFZXJvekfNC7qW_zqeE82PujSbbzRT_gIauFrOxAPXrx0-8V_GbUujYcLGTDSuEklBrfNatDl5mhCbnIeBevj9KlbWRTN2kAAN_RHGLFoiF4F3tjYKGerU0bicMt3UdWk6e-dpq25UKLHg_Q07qGEmwA2TlI0aC05rXnYLv9kIdQ30ZfembcMRy_kSSUm3KJB2igjgU8AYdbQUM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-10 text-white">
+<h4 class="font-headline-md text-headline-md mb-2">Preventive Care</h4>
+<p class="font-body-md opacity-90 max-w-sm mb-6">Foundational dentistry including deep cleaning, screenings, and oral health maintenance.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-colors">Learn More</button>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-2xl h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A close-up, high-detail photo of a modern dental restoration process, showing professional tools and high-quality materials. The lighting is focused and clinical yet warm, with a shallow depth of field. Soft purple and blue tones pervade the scene, reflecting the boutique branding of a luxury clinic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-h9I3xCVQGR0JtlbwDx19LPQKWPsLS9__hcNzgW5-MHjq9hAxxYZ5Tdy9Qbm9a-mpW6nJLzfiLGrME-7uPu50XG1yxgVzxjm398WAg0t3dv96bxjP2nXdZdGHiglwSDoeLOUdCSqSzB8m217gAv0dbGMhWeLYoBYQ6l5IKV4FlntWYvIclnMKrp4-bqfpSzyIqY10XaULjwuiF0vmo47D0ZK7ec2EvpWNB-EAvEMI-AXxta-hU1Zl7uziqOVBWDJmHe0o43A8W08"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-10 text-white">
+<h4 class="font-headline-md text-headline-md mb-2">Restorative</h4>
+<p class="font-body-md opacity-90 mb-6">Expert fillings, crowns, and implants.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-colors">Learn More</button>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-2xl h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A bright, high-contrast photograph of a person showing a perfect, white smile after a cosmetic dental treatment. The environment is a clean, modern white room with soft, diffuse lighting that flatters the subject. Subtle purple lighting accents the background, tying into the clinic's premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDETEuNud0A6QstLW1ssaoIY9Peul-fBiq_tXjPoeZyFvk4X3dlD_ErSDDTESO-7Sk2k6puGmyLuB9icQDpT85dBWtymhoMUC4MDi9t5VnD5I0FeBsrSkxk-96UlUBPGxIEL90Iy7z44MnS6YBiivzO__aMwpMXTj69YOPy-ETJoFyya_wCw511rgLkS4Ekq7n70dExRZhIWaVestbt8VCKYvDUzRWj7-dhaOpRePPWB7qXTrjapjy_IVKcdI2grknBbuNKiLqp7Ss"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-10 text-white">
+<h4 class="font-headline-md text-headline-md mb-2">Cosmetic Services</h4>
+<p class="font-body-md opacity-90 mb-6">Whitening, veneers, and smile makeovers.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-colors">Learn More</button>
+</div>
+</div>
+<!-- Service 4 -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-2xl h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A professional medical setting showing a consultation between a smiling dentist and a patient. They are looking at a digital tablet with high-resolution teeth scans. The room is brightly lit with warm, natural light pouring through large windows, creating a welcoming and modern clinical atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3V0zgJ-Ya3ss8Y1KSiRyd06-etUSbF4PSpHelozKe0FM_mBuRoGMGJwgltbzsmuj-SPGSylsd1V6lUa3czJdWkOL7jWWgiEqZIhlDytJLS6aLLy7TcDgiLMdOBj1B51QruEQA0rWj1ZbMv9gghzJZB7-ZZVCX1hvs9qMV1KJIx-baw4c1Y9E8xTkjoLjmKp-Bvdf2OWbxRR-17Wd0k5hf31bEgGqSHJQDzq9X2xrfiPd6tf6eYHNvf2Gu0oNnFCuW6wwY_tvLxr4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-10 text-white">
+<h4 class="font-headline-md text-headline-md mb-2">Invisalign®</h4>
+<p class="font-body-md opacity-90 max-w-sm mb-6">Straighten your teeth discreetly with the world's most advanced clear aligner system.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-colors">Learn More</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust / CTA Banner Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-section-gap">
+<div class="bg-primary rounded-3xl p-16 md:p-24 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[400px] absolute -right-20 -top-20" style="font-variation-settings: 'FILL' 1;">dentistry</span>
+</div>
+<div class="relative z-10 text-center md:text-left max-w-xl">
+<h2 class="font-headline-xl text-headline-xl text-on-primary mb-6">Ready for a Brighter Smile?</h2>
+<p class="font-body-lg text-body-lg text-on-primary-container mb-0">Join the hundreds of patients who have transformed their lives through our premium dental care. Your boutique experience begins here.</p>
+</div>
+<div class="relative z-10">
+<button class="bg-white text-primary px-12 py-5 rounded-full font-headline-md text-headline-md font-bold shadow-xl hover:scale-105 transition-transform active:scale-95 whitespace-nowrap" onclick="window.location.href='appointment.html'">
+                    Book Your Visit Now
+                </button>
+</div>
+</div>
+</section>
+<!-- GALLERY SECTION -->
+<section class="py-section-gap bg-surface">
+
+  <div class="max-w-container-max mx-auto px-margin-desktop">
+
+    <div class="text-center mb-16">
+
+      <span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">
+        Our Gallery
+      </span>
+
+      <h2 class="font-headline-lg text-headline-lg text-primary mb-4">
+        Inside Tanna Dental Clinic
+      </h2>
+
+      <p class="text-on-surface-variant font-body-lg max-w-2xl mx-auto">
+        Explore our clinic and patient care environment.
+      </p>
+
+    </div>
+
+    <div
+      id="galleryGrid"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    </div>
+
+  </div>
+
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container py-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-8">
+<img alt="Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBce-d0y1xv9RNkJWUUg2exbCPB30DMWHHLKgNDPePtK7FTjUj2wQ-LExFxrfUbGRpyH-UOxud1JSU4P7iYG1yF1MUeAcrZlR8DFnffiQh_FNTm0ziYfPct4gKOHx_Hog6FJs1keVQ0ZbRTCMhK8v6kfVDSmCuyVS7brs92qdJQFKzUCjBP0cpcJ7nSJfxdizn2NBWfEk1urzxftJvRemmraJPDEhznNqgB6Sn9fGO2WV93sX_udg1pW-oh75jB0lXtOq4KgMQ-4z0"/>
+<span class="text-headline-md font-headline-md font-bold text-primary">Tanna Dental</span>
+</div>
+<p class="text-on-surface-variant font-body-md mb-8">Clinical Excellence in Dentistry. Redefining your oral health journey with care and precision.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 bg-surface flex items-center justify-center rounded-full text-primary hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</a>
+<a class="w-10 h-10 bg-surface flex items-center justify-center rounded-full text-primary hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-8">Contact Us</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span>123 Luxury Avenue,<br/>Premium District, City 90210</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">call</span>
+<span>+91 712 357 3986</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+<span>Mon-Fri: Morning 10:30AM - 2PM 
+<br/> Evening 6:00PM - 8:30PM<br/>Sun: Closed</span>
+</span>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-8">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Treatments</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Our Team</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="sign.html">Patient Portal (Login)</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">FAQs</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-8">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Terms of Service</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Accessibility</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Sitemap</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-20 pt-8 border-t border-surface-container-highest">
+<p class="text-on-surface-variant font-body-md text-center opacity-70">
+                © 2024 Tanna Dental Clinic. Clinical Excellence in Dentistry. All rights reserved.
+            </p>
+</div>
+</footer>
+<!-- Mobile Booking Widget (Sticky) -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden w-[calc(100%-32px)]">
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-headline-md text-headline-md shadow-2xl flex items-center justify-center gap-2" onclick="window.location.href='appointment.html'">
+<span class="material-symbols-outlined">calendar_month</span>
+            Book Appointment
+        </button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script>
+
+async function loadGallery() {
+
+  const galleryGrid =
+    document.getElementById("galleryGrid");
+
+  const { data, error } =
+    await supabaseClient
+      .from("gallery")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  galleryGrid.innerHTML = "";
+
+  data.forEach(item => {
+    const caption = escapeHtml(item.caption || "");
+
+    galleryGrid.innerHTML += `
+      <div class="group relative overflow-hidden rounded-3xl premium-shadow">
+
+        <img
+          src="${item.image_url}"
+          alt="${caption || 'Tanna Dental clinic photo'}"
+          class="w-full h-[320px] object-cover transition-transform duration-500 group-hover:scale-110"/>
+
+        ${caption ? `<div class="absolute bottom-0 left-0 right-0 bg-primary/70 text-white px-4 py-3 font-label-md text-label-md">${caption}</div>` : ""}
+      </div>
+    `;
+  });
+
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+loadGallery();
+
+</script>
+</body></html>
