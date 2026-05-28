@@ -321,7 +321,7 @@ tailwind.config = {
     <div class="p-6 space-y-4">
       <div>
         <label class="block text-sm font-semibold text-on-surface-variant mb-1">Select Photo *</label>
-        <input id="galleryImage" type="file" accept="image/*"
+        <input id="galleryImage" type="file" accept="image/*,video/*"
           class="w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-secondary-container file:text-on-surface cursor-pointer"/>
       </div>
       <div>
@@ -464,14 +464,31 @@ async function saveService() {
 
   // Upload image if selected
   if (imageFile) {
-    const fileName = buildStoragePath('services', imageFile);
-    const { data: uploadData, error: uploadError } = await supabaseClient.storage
-      .from('clinic-images').upload(fileName, imageFile, { upsert: true });
-    if (uploadError) { showFormError(errorEl, 'Image upload failed: ' + uploadError.message); btn.disabled=false; btn.textContent='Save Service'; return; }
-    const { data: urlData } = supabaseClient.storage.from('clinic-images').getPublicUrl(fileName);
-    image_url = urlData.publicUrl;
+  const fileName = buildStoragePath('services', imageFile);
+
+  const { data: uploadData, error: uploadError } =
+    await supabaseClient.storage
+      .from('gallery')
+      .upload(fileName, imageFile, { upsert: true });
+
+  if (uploadError) {
+    showFormError(
+      errorEl,
+      'Image upload failed: ' + uploadError.message
+    );
+
+    btn.disabled = false;
+    btn.textContent = 'Save Service';
+    return;
   }
 
+  const { data: urlData } =
+    supabaseClient.storage
+      .from('gallery')
+      .getPublicUrl(fileName);
+
+  image_url = urlData.publicUrl;
+}
   const payload = { title, description: desc, price };
   if (image_url) payload.image_url = image_url;
 
@@ -500,25 +517,63 @@ async function deleteService(id) {
 
 // ─── GALLERY ──────────────────────────────────────────────
 async function loadGallery() {
-  const { data } = await supabaseClient.from('gallery').select('*').order('display_order');
   const el = document.getElementById('galleryList');
-  if (!data || data.length === 0) {
-    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant col-span-4">
-      <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
-      <p class="mt-2 font-semibold">No photos yet</p>
-      <p class="text-sm opacity-70">Click "Upload Photo" to add clinic images</p>
+
+  const { data, error } = await supabaseClient.storage
+    .from('gallery')
+    .list('', {
+      limit: 100,
+      sortBy: { column: 'created_at', order: 'desc' }
+    });
+
+  if (error) {
+    el.innerHTML = `<div class="text-center py-12 text-error col-span-4">
+      Failed to load gallery: ${error.message}
     </div>`;
     return;
   }
-  el.innerHTML = data.map(g => `
-    <div class="relative group rounded-2xl overflow-hidden bg-surface-container aspect-square">
-      <img src="${g.image_url}" class="w-full h-full object-cover"/>
-      ${g.caption ? `<div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 font-semibold">${escapeHtml(g.caption)}</div>` : ''}
-      <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-        <button onclick="deleteGallery('${g.id}')" class="bg-white text-error px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-error-container transition-colors">Delete</button>
-      </div>
+
+  if (!data || data.length === 0) {
+    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant col-span-4">
+      <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
+      <p class="mt-2 font-semibold">No media yet</p>
+      <p class="text-sm opacity-70">Upload images or videos</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = data.map(file => {
+    const { data: urlData } = supabaseClient.storage
+      .from('gallery')
+      .getPublicUrl(file.name);
+
+    const url = urlData.publicUrl;
+    const isVideo = /\.(mp4|webm|ogg|mov)$/i.test(file.name);
+
+   return `
+  <div class="relative group rounded-2xl overflow-hidden bg-surface-container aspect-square">
+
+    ${
+      isVideo
+        ? `<video src="${url}" controls muted class="w-full h-full object-cover"></video>`
+        : `<img src="${url}" class="w-full h-full object-cover"/>`
+    }
+
+    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+
+      <button
+        onclick="deleteGallery('${file.name}')"
+        class="bg-white text-error px-4 py-2 rounded-xl text-sm font-bold hover:bg-error-container transition-colors">
+
+        Delete
+
+      </button>
+
     </div>
-  `).join('');
+
+  </div>
+`;
+  }).join('');
 }
 
 function openGalleryModal() {
@@ -533,47 +588,63 @@ function closeGalleryModal() {
 }
 
 async function saveGallery() {
-  const imageFile = document.getElementById('galleryImage').files[0];
-  const caption = document.getElementById('galleryCaption').value.trim();
+  const file = document.getElementById('galleryImage').files[0];
   const btn = document.getElementById('saveGalleryBtn');
   const errorEl = document.getElementById('galleryError');
 
-  if (!imageFile) { showFormError(errorEl, 'Please select an image.'); return; }
-  if (!isValidImageFile(imageFile, errorEl)) return;
+  if (!file) {
+    showFormError(errorEl, 'Please select an image or video.');
+    return;
+  }
 
   btn.disabled = true;
   btn.textContent = 'Uploading...';
   errorEl.classList.add('hidden');
 
-  const fileName = buildStoragePath('gallery', imageFile);
+  const ext = file.name.split('.').pop();
+  const fileName = `gallery-${Date.now()}.${ext}`;
+
   const { error: uploadError } = await supabaseClient.storage
-    .from('clinic-images').upload(fileName, imageFile, { upsert: true });
-
-  if (uploadError) { showFormError(errorEl, 'Upload failed: ' + uploadError.message); btn.disabled=false; btn.textContent='Upload Photo'; return; }
-
-  const { data: urlData } = supabaseClient.storage.from('clinic-images').getPublicUrl(fileName);
-  const { error } = await supabaseClient.from('gallery').insert({ image_url: urlData.publicUrl, caption });
+    .from('gallery')
+    .upload(fileName, file, {
+      cacheControl: '3600',
+      upsert: false
+    });
 
   btn.disabled = false;
-  btn.textContent = 'Upload Photo';
+  btn.textContent = 'Upload Media';
 
-  if (error) { showFormError(errorEl, error.message); return; }
+  if (uploadError) {
+    showFormError(errorEl, 'Upload failed: ' + uploadError.message);
+    return;
+  }
+
   closeGalleryModal();
   loadGallery();
   loadStats();
 }
 
-async function deleteGallery(id) {
-  if (!confirm('Delete this photo?')) return;
-  await supabaseClient.from('gallery').delete().eq('id', id);
+async function deleteGallery(fileName) {
+  if (!confirm('Delete this media?')) return;
+
+  await supabaseClient.storage
+    .from('gallery')
+    .remove([fileName]);
+
   loadGallery();
   loadStats();
 }
 
 // ─── APPOINTMENTS ─────────────────────────────────────────
 async function loadAppointments() {
-  const { data } = await supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
+  const { data, error } = await supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
   const el = document.getElementById('appointmentsList');
+  if (error) {
+    el.innerHTML = `<tr><td colspan="5" class="text-center py-12 text-error">
+      Failed to load appointments: ${escapeHtml(error.message)}
+    </td></tr>`;
+    return;
+  }
   if (!data || data.length === 0) {
     el.innerHTML = `<tr><td colspan="5" class="text-center py-12 text-on-surface-variant">
       <span class="material-symbols-outlined text-[48px] opacity-30 block mx-auto">calendar_month</span>
@@ -581,35 +652,42 @@ async function loadAppointments() {
     </td></tr>`;
     return;
   }
-  el.innerHTML = data.map(a => `
+  el.innerHTML = data.map(a => {
+    const status = normalizeAppointmentStatus(a.status);
+    return `
     <tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
       <td class="px-4 py-3">
-        <p class="font-semibold text-on-surface">${a.name}</p>
-        <p class="text-xs text-on-surface-variant">${a.email}</p>
+        <p class="font-semibold text-on-surface">${escapeHtml(a.name || 'Unknown patient')}</p>
+        <p class="text-xs text-on-surface-variant">${escapeHtml(a.email || a.phone || '')}</p>
       </td>
       <td class="px-4 py-3 text-on-surface-variant">${a.service || '—'}</td>
       <td class="px-4 py-3 text-on-surface-variant">${a.preferred_date || '—'}</td>
       <td class="px-4 py-3">
         <span class="px-2 py-1 rounded-full text-xs font-bold ${
-          a.status === 'confirmed' ? 'bg-green-100 text-green-800' :
-          a.status === 'cancelled' ? 'bg-error-container text-on-error-container' :
+          status === 'confirmed' ? 'bg-green-100 text-green-800' :
+          status === 'cancelled' ? 'bg-error-container text-on-error-container' :
           'bg-secondary-container text-on-secondary-container'
-        }">${a.status || 'pending'}</span>
+        }">${status}</span>
       </td>
       <td class="px-4 py-3">
         <select onchange="updateStatus('${a.id}', this.value)" class="text-xs border border-outline-variant rounded-lg px-2 py-1 outline-none">
-          <option ${a.status==='pending'?'selected':''}>pending</option>
-          <option ${a.status==='confirmed'?'selected':''}>confirmed</option>
-          <option ${a.status==='cancelled'?'selected':''}>cancelled</option>
+          <option ${status==='pending'?'selected':''}>pending</option>
+          <option ${status==='confirmed'?'selected':''}>confirmed</option>
+          <option ${status==='cancelled'?'selected':''}>cancelled</option>
         </select>
       </td>
     </tr>
-  `).join('');
+  `;
+  }).join('');
 }
 
 async function updateStatus(id, status) {
   await supabaseClient.from('appointments').update({ status }).eq('id', id);
   loadAppointments();
+}
+
+function normalizeAppointmentStatus(status) {
+  return ['pending', 'confirmed', 'cancelled'].includes(status) ? status : 'pending';
 }
 
 // ─── HELPERS ──────────────────────────────────────────────

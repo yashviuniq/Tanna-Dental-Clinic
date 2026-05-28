@@ -117,8 +117,9 @@
 </div>
 <nav class="hidden md:flex items-center gap-10">
 <a class="text-primary font-bold border-b-2 border-secondary font-label-md text-label-md py-1" href="#">Home</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#">Treatments</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#">Our Team</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#treatments">Treatments</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#gallery">Gallery</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#team">Our Team</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="sign.html">Patient Portal (Login)</a>
 </nav>
 <button class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95" onclick="window.location.href='appointment.html'">
@@ -147,9 +148,9 @@
 <button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-md text-label-md hover:opacity-90 transition-all flex items-center gap-2" onclick="window.location.href='appointment.html'">
                         Book Appointment <span class="material-symbols-outlined text-[20px]">calendar_today</span>
 </button>
-<button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-full font-label-md text-label-md hover:bg-secondary-container/80 transition-all">
-                        View Services
-                    </button>
+<button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-full font-label-md text-label-md hover:bg-secondary-container/80 transition-all flex items-center gap-2" onclick="document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' })">
+                        View Gallery <span class="material-symbols-outlined text-[20px]">photo_library</span>
+</button>
 </div>
 </div>
 </div>
@@ -185,19 +186,22 @@
 </div>
 </div>
 </section>
-<!-- Services Section -->
-<section class="py-section-gap">
+<!-- Treatments Section -->
+<section id="treatments" class="py-section-gap scroll-mt-24">
 <div class="max-w-container-max mx-auto px-margin-desktop">
 <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
 <div class="max-w-xl">
-<h2 class="font-headline-lg text-headline-lg text-primary mb-4">World-Class Services</h2>
-<p class="text-on-surface-variant font-body-lg">Comprehensive dental solutions tailored to your unique smile and overall health goals.</p>
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">
+                    Our Treatments
+                </span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Complete Dental Care</h2>
+<p class="text-on-surface-variant font-body-lg">Comprehensive treatment options for healthy teeth, confident smiles, and long-term oral wellness.</p>
 </div>
-<a class="text-primary font-bold font-label-md flex items-center gap-2 hover:text-secondary transition-colors" href="#">
-                    Explore All Treatments <span class="material-symbols-outlined">arrow_forward</span>
+<a class="text-primary font-bold font-label-md flex items-center gap-2 hover:text-secondary transition-colors" href="appointment.html">
+                    Book a Consultation <span class="material-symbols-outlined">arrow_forward</span>
 </a>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="hidden">
 <!-- Service 1 - Bento Style -->
 <div class="md:col-span-8 group relative overflow-hidden rounded-2xl h-[400px]">
 <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A clean, minimalist image showing a professional dentist examining a patient's teeth in a high-tech bright clinic. The lighting is soft and airy, highlighting a sense of calm and precision. The color palette is dominated by whites, cool greys, and subtle purple accents, emphasizing medical professionalism and comfort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhW9Chx5r0mZ5-qZCA33BwOY1i2BR_HWlUqPddbbaF94HKgM-sdGdFlYAWBtonWFZXJvekfNC7qW_zqeE82PujSbbzRT_gIauFrOxAPXrx0-8V_GbUujYcLGTDSuEklBrfNatDl5mhCbnIeBevj9KlbWRTN2kAAN_RHGLFoiF4F3tjYKGerU0bicMt3UdWk6e-dpq25UKLHg_Q07qGEmwA2TlI0aC05rXnYLv9kIdQ30ZfembcMRy_kSSUm3KJB2igjgU8AYdbQUM"/>
@@ -239,6 +243,54 @@
 </div>
 </div>
 </div>
+<div id="treatmentsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+</div>
+</div>
+</section>
+<!-- OUR TEAM SECTION -->
+<section id="team" class="py-section-gap bg-surface-bright scroll-mt-24">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="relative overflow-hidden rounded-3xl premium-shadow bg-surface-container min-h-[420px]">
+<img class="absolute inset-0 w-full h-full object-cover" alt="Dr. Dinesh Tanna at Tanna Dental" src="assets/dr-dinesh-tanna.jpeg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent"></div>
+<div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+<p class="font-label-md text-label-md uppercase tracking-wide opacity-90">Lead Dentist</p>
+<h2 class="font-headline-lg text-headline-lg mt-2">Dr. Dinesh Tanna</h2>
+</div>
+</div>
+<div>
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">
+                    Our Team
+                </span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-5">Care Led by Experience</h2>
+<p class="text-on-surface-variant font-body-lg mb-8">
+                    Dr. Dinesh Tanna brings 20+ years of experience in dentistry, with a focus on careful diagnosis, practical treatment planning, and patient comfort.
+                </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">workspace_premium</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">20+ Years</h3>
+<p class="text-on-surface-variant font-body-md">Clinical dental experience.</p>
+</div>
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">diagnosis</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Oral Diagnosis</h3>
+<p class="text-on-surface-variant font-body-md">Examination-led treatment guidance.</p>
+</div>
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">health_and_safety</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Preventive Care</h3>
+<p class="text-on-surface-variant font-body-md">Hygiene and long-term oral health counseling.</p>
+</div>
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">sentiment_satisfied</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Patient Comfort</h3>
+<p class="text-on-surface-variant font-body-md">Clear communication before treatment.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <!-- Trust / CTA Banner Section -->
@@ -259,7 +311,7 @@
 </div>
 </section>
 <!-- GALLERY SECTION -->
-<section class="py-section-gap bg-surface">
+<section id="gallery" class="py-section-gap bg-surface scroll-mt-24">
 
   <div class="max-w-container-max mx-auto px-margin-desktop">
 
@@ -282,6 +334,10 @@
     <div
       id="galleryGrid"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3">
+        <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
+        <p class="mt-2 font-label-md text-label-md">Loading gallery...</p>
+      </div>
     </div>
 
   </div>
@@ -327,8 +383,8 @@
 <div>
 <h4 class="font-headline-md text-headline-md text-primary mb-8">Quick Links</h4>
 <ul class="space-y-4">
-<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Treatments</a></li>
-<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Our Team</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#treatments">Treatments</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#team">Our Team</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="sign.html">Patient Portal (Login)</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">FAQs</a></li>
 </ul>
@@ -360,36 +416,163 @@
 <script src="supabase.js"></script>
 <script>
 
+const treatments = [
+  "General Consultation & Oral Examination",
+  "Dental Cleaning / Scaling & Polishing",
+  "Teeth Whitening / Bleaching",
+  "Fillings (Composite / Silver)",
+  "Root Canal Treatment (RCT)",
+  "Tooth Extraction",
+  "Wisdom Tooth Removal",
+  "Dental Crowns & Bridges",
+  "Dental Implants",
+  "Dentures (Full & Partial)",
+  "Veneers & Smile Designing",
+  "Orthodontic Treatment (Braces & Aligners)",
+  "Pediatric Dentistry (Kids Dentistry)",
+  "Gum Disease Treatment / Periodontal Therapy",
+  "Deep Cleaning / Root Planing",
+  "Tooth-Colored Restorations",
+  "Inlays & Onlays",
+  "Cosmetic Dentistry",
+  "Full Mouth Rehabilitation",
+  "Jaw Pain / TMJ Treatment",
+  "Mouth Ulcer Treatment",
+  "Sensitive Teeth Treatment",
+  "Fluoride Treatment",
+  "Pit & Fissure Sealants",
+  "Emergency Dental Care",
+  "Broken Tooth Repair",
+  "Dental X-Rays & Oral Diagnosis",
+  "Laser Dentistry",
+  "Gum Surgery",
+  "Bone Grafting",
+  "Sinus Lift Procedure",
+  "Crown Lengthening",
+  "Teeth Reshaping & Contouring",
+  "Retainers & Night Guards",
+  "Sports Mouth Guards",
+  "Bad Breath Treatment",
+  "Oral Infection Treatment",
+  "Dry Socket Treatment",
+  "Dental Jewellery / Tooth Gems",
+  "Preventive Dental Care",
+  "Preventive Check-ups & Oral Hygiene Counseling"
+];
+
+const treatmentImages = {
+  exam: "https://lh3.googleusercontent.com/aida-public/AB6AXuCHp9dAi41hFBJuMe-dXE4wYXQci_VJ_LHS5ezLzpcigKKt9U-B68BtDA-pG5sWQjen2xd_lroNqCKmUgqpjKSln_vgOzx4UGA98HaE5Nnw9zSD-OBdW2Vq29i9OI3ekLwqn5nvYWZHsRTkW8-v9AYyv11kKrIiFC-U77yOHzXNl_3CCilkUnYnCUsE2wKuA6NIQzbrf_6LxCCMt6tZONvVFgxQqrscTTCGnaCGr30scNMpfnyPXXOyGV8GNCAy5pqwHKy32N_ldZE",
+  preventive: "https://lh3.googleusercontent.com/aida-public/AB6AXuAhW9Chx5r0mZ5-qZCA33BwOY1i2BR_HWlUqPddbbaF94HKgM-sdGdFlYAWBtonWFZXJvekfNC7qW_zqeE82PujSbbzRT_gIauFrOxAPXrx0-8V_GbUujYcLGTDSuEklBrfNatDl5mhCbnIeBevj9KlbWRTN2kAAN_RHGLFoiF4F3tjYKGerU0bicMt3UdWk6e-dpq25UKLHg_Q07qGEmwA2TlI0aC05rXnYLv9kIdQ30ZfembcMRy_kSSUm3KJB2igjgU8AYdbQUM",
+  restorative: "https://lh3.googleusercontent.com/aida-public/AB6AXuA-h9I3xCVQGR0JtlbwDx19LPQKWPsLS9__hcNzgW5-MHjq9hAxxYZ5Tdy9Qbm9a-mpW6nJLzfiLGrME-7uPu50XG1yxgVzxjm398WAg0t3dv96bxjP2nXdZdGHiglwSDoeLOUdCSqSzB8m217gAv0dbGMhWeLYoBYQ6l5IKV4FlntWYvIclnMKrp4-bqfpSzyIqY10XaULjwuiF0vmo47D0ZK7ec2EvpWNB-EAvEMI-AXxta-hU1Zl7uziqOVBWDJmHe0o43A8W08",
+  cosmetic: "https://lh3.googleusercontent.com/aida-public/AB6AXuDETEuNud0A6QstLW1ssaoIY9Peul-fBiq_tXjPoeZyFvk4X3dlD_ErSDDTESO-7Sk2k6puGmyLuB9icQDpT85dBWtymhoMUC4MDi9t5VnD5I0FeBsrSkxk-96UlUBPGxIEL90Iy7z44MnS6YBiivzO__aMwpMXTj69YOPy-ETJoFyya_wCw511rgLkS4Ekq7n70dExRZhIWaVestbt8VCKYvDUzRWj7-dhaOpRePPWB7qXTrjapjy_IVKcdI2grknBbuNKiLqp7Ss",
+  ortho: "https://lh3.googleusercontent.com/aida-public/AB6AXuB3V0zgJ-Ya3ss8Y1KSiRyd06-etUSbF4PSpHelozKe0FM_mBuRoGMGJwgltbzsmuj-SPGSylsd1V6lUa3czJdWkOL7jWWgiEqZIhlDytJLS6aLLy7TcDgiLMdOBj1B51QruEQA0rWj1ZbMv9gghzJZB7-ZZVCX1hvs9qMV1KJIx-baw4c1Y9E8xTkjoLjmKp-Bvdf2OWbxRR-17Wd0k5hf31bEgGqSHJQDzq9X2xrfiPd6tf6eYHNvf2Gu0oNnFCuW6wwY_tvLxr4",
+  rootCanal: "https://tse4.mm.bing.net/th/id/OIP.Q2ni-rceC7H7lUxcifil4wHaF7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+  extraction: "https://uploads-ssl.webflow.com/61e7a911958c1d7dfe2a57d8/6486c29ea3b3cbfe8f8adc6e_639c0c45bf582dfa6d06718b_Tooth%2520Extraction%2520Bleeding.jpeg",
+  wisdom: "https://tse1.explicit.bing.net/th/id/OIP.2XQ5kd8jeRn68XBz7P4FxAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+  crown: "https://gorgeoussmiledental.com/wp-content/uploads/2020/08/Types-of-Dental-Crown.png",
+  implant: "https://lirp.cdn-website.com/99a2f23e/dms3rep/multi/opt/dental+implants-1920w.jpeg",
+  dentures: "https://tse1.explicit.bing.net/th/id/OIP.6aU553lmScQWY3bwF6Z8iAHaFN?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+  smileDesign: "https://tse1.explicit.bing.net/th/id/OIP.yTiUVU2rPJpIXQb17vTf-QHaEf?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+  hygieneCounseling: "https://tse4.mm.bing.net/th/id/OIP.2bJeOuKn3MjU7QxO9Uu0KgHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+  oralInfection: "https://tse1.mm.bing.net/th/id/OIP.xk9K5hTEc7w6fCVkGb-mvwHaDq?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+  drySocket: "https://mediclinicusa.com/wp-content/uploads/2025/02/DALL%C2%B7E-2025-02-14-17.47.50-A-medical-illustration-comparing-a-normal-healing-tooth-extraction-site-versus-a-dry-socket.-The-left-side-shows-a-healthy-socket-with-a-dark-red-bloo.webp",
+  toothGems: "https://img.drz.lazcdn.com/static/pk/p/263230dab4a78d243857504ce5f49c82.jpg_720x720q80.jpg"
+};
+
+function getTreatmentImage(treatment) {
+  const text = treatment.toLowerCase();
+  if (text.includes("root canal")) return treatmentImages.rootCanal;
+  if (text.includes("wisdom tooth")) return treatmentImages.wisdom;
+  if (text.includes("tooth extraction")) return treatmentImages.extraction;
+  if (text.includes("crown")) return treatmentImages.crown;
+  if (text.includes("implant")) return treatmentImages.implant;
+  if (text.includes("denture")) return treatmentImages.dentures;
+  if (text.includes("smile designing")) return treatmentImages.smileDesign;
+  if (text.includes("oral hygiene counseling")) return treatmentImages.hygieneCounseling;
+  if (text.includes("oral infection")) return treatmentImages.oralInfection;
+  if (text.includes("dry socket")) return treatmentImages.drySocket;
+  if (text.includes("tooth gems") || text.includes("dental jewellery")) return treatmentImages.toothGems;
+  if (/whitening|bleaching|veneer|smile|cosmetic|jewellery|contouring|reshaping/.test(text)) return treatmentImages.cosmetic;
+  if (/brace|aligner|retainer|night guard|mouth guard|tmj|jaw/.test(text)) return treatmentImages.ortho;
+  if (/crown|bridge|implant|denture|filling|root canal|restoration|inlay|onlay|rehabilitation|broken|grafting|sinus/.test(text)) return treatmentImages.restorative;
+  if (/cleaning|scaling|polishing|gum|periodontal|fluoride|sealant|preventive|hygiene|bad breath|sensitive/.test(text)) return treatmentImages.preventive;
+  return treatmentImages.exam;
+}
+
+function renderTreatments() {
+  const treatmentsGrid = document.getElementById("treatmentsGrid");
+  if (!treatmentsGrid) return;
+
+  treatmentsGrid.innerHTML = treatments.map(treatment => `
+    <article class="group overflow-hidden rounded-2xl bg-white premium-shadow border border-surface-container-highest">
+      <div class="relative h-44 overflow-hidden bg-surface-container">
+        <img src="${getTreatmentImage(treatment)}" alt="${escapeHtml(treatment)}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/35 to-transparent"></div>
+      </div>
+      <div class="p-5">
+        <h3 class="font-headline-md text-[18px] leading-6 text-primary">${escapeHtml(treatment)}</h3>
+      </div>
+    </article>
+  `).join("");
+}
+
 async function loadGallery() {
 
   const galleryGrid =
     document.getElementById("galleryGrid");
 
   const { data, error } =
-    await supabaseClient
+    await supabaseClient.storage
       .from("gallery")
-      .select("*")
-      .order("created_at", { ascending: false });
+      .list("", {
+        limit: 100,
+        sortBy: { column: "created_at", order: "desc" }
+      });
 
   if (error) {
     console.error(error);
+    galleryGrid.innerHTML = `
+      <div class="text-center py-12 text-error sm:col-span-2 lg:col-span-3">
+        Could not load gallery right now.
+      </div>
+    `;
+    return;
+  }
+
+  const files = (data || []).filter(file => {
+    const name = file.name || "";
+    return /\.(avif|gif|jpe?g|png|webp|mp4|mov|ogg|webm)$/i.test(name);
+  });
+
+  if (files.length === 0) {
+    galleryGrid.innerHTML = `
+      <div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3">
+        <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
+        <p class="mt-2 font-label-md text-label-md">No gallery media yet.</p>
+      </div>
+    `;
     return;
   }
 
   galleryGrid.innerHTML = "";
 
-  data.forEach(item => {
-    const caption = escapeHtml(item.caption || "");
+  files.forEach(file => {
+    const fileName = escapeHtml(file.name);
+    const { data: urlData } = supabaseClient.storage
+      .from("gallery")
+      .getPublicUrl(file.name);
+
+    const url = urlData.publicUrl;
+    const isVideo = /\.(mp4|mov|ogg|webm)$/i.test(file.name);
 
     galleryGrid.innerHTML += `
       <div class="group relative overflow-hidden rounded-3xl premium-shadow">
 
-        <img
-          src="${item.image_url}"
-          alt="${caption || 'Tanna Dental clinic photo'}"
-          class="w-full h-[320px] object-cover transition-transform duration-500 group-hover:scale-110"/>
-
-        ${caption ? `<div class="absolute bottom-0 left-0 right-0 bg-primary/70 text-white px-4 py-3 font-label-md text-label-md">${caption}</div>` : ""}
+        ${
+          isVideo
+            ? `<video src="${url}" controls muted playsinline class="w-full h-[320px] bg-black object-cover"></video>`
+            : `<img src="${url}" alt="Tanna Dental gallery media: ${fileName}" class="w-full h-[320px] object-cover transition-transform duration-500 group-hover:scale-110"/>`
+        }
       </div>
     `;
   });
@@ -406,6 +589,7 @@ function escapeHtml(value) {
   }[char]));
 }
 
+renderTreatments();
 loadGallery();
 
 </script>
