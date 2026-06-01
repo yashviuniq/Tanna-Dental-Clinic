@@ -1,0 +1,20 @@
+{
+  "name": "Tanna Dental Clinic",
+  "short_name": "Tanna Dental",
+  "description": "Tanna Dental Clinic website, appointments, and admin portal.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8f9fc",
+  "theme_color": "#000f22",
+  "orientation": "portrait-primary",
+  "categories": ["health", "medical", "business"],
+  "icons": [
+    {
+      "src": "/assets/dr-dinesh-tanna.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
