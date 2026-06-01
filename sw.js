@@ -1,4 +1,4 @@
-const CACHE_NAME = "tanna-dental-v1";
+const CACHE_NAME = "tanna-dental-v2";
 const APP_SHELL = [
   "/",
   "/index.html",

@@ -78,6 +78,18 @@ tailwind.config = {
   display: inline-block;
   animation: spin 1s linear infinite;
 }
+
+@media (max-width: 767px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+}
 </style>
 
 </head>
@@ -114,7 +126,7 @@ tailwind.config = {
 <!-- MAIN -->
 <main class="min-h-[calc(100vh-80px)] flex items-center justify-center px-margin-mobile md:px-margin-desktop py-12">
 
-  <div class="w-full max-w-[480px] bg-white rounded-2xl border border-surface-container-highest p-8 md:p-12 login-card-shadow">
+  <div class="w-full max-w-[480px] bg-white rounded-2xl border border-surface-container-highest p-6 md:p-12 login-card-shadow">
 
     <!-- ICON -->
     <div class="text-center mb-10">

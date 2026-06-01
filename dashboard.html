@@ -111,15 +111,57 @@
         .hero-gradient {
             background: linear-gradient(to right, rgba(248, 249, 252, 0.95) 30%, rgba(248, 249, 252, 0.4) 100%);
         }
+        @media (max-width: 767px) {
+            html, body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            .px-margin-desktop {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+            .py-section-gap {
+                padding-top: 64px !important;
+                padding-bottom: 64px !important;
+            }
+            .mb-section-gap {
+                margin-bottom: 64px !important;
+            }
+            .text-headline-xl {
+                font-size: 34px !important;
+                line-height: 42px !important;
+                letter-spacing: 0 !important;
+            }
+            .text-headline-lg {
+                font-size: 28px !important;
+                line-height: 36px !important;
+                letter-spacing: 0 !important;
+            }
+            .text-headline-md {
+                font-size: 20px !important;
+                line-height: 28px !important;
+            }
+            .text-body-lg {
+                font-size: 16px !important;
+                line-height: 25px !important;
+            }
+            .h-screen {
+                height: auto !important;
+                min-height: 100svh;
+            }
+            .hero-gradient {
+                background: linear-gradient(to bottom, rgba(248, 249, 252, 0.96), rgba(248, 249, 252, 0.78));
+            }
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body-md antialiased">
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-surface shadow-sm h-20 transition-all duration-300">
-<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-full">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-full">
 <div class="flex items-center gap-3">
 <img alt="Tanna Dental Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGQhBRZKMZ-rWj5MoTjsGsIBKl6zN78QLvBVY60anNvtGCQPIDCuwYGThnh3jGf4_D6cReRP0oaH5aBiNJ3gsiTu4aqN44sz3EmIlz_jHFyethtztYnZNm3MmB8djrxSTSrmGr1BQwiLkSJr00mSrlQAUy0_MBXOkSe4vYDSKVLc_QNMQTIfnX-3sA9lGwNX0IEYUxXngVFlBjm9MpDmIsb_8w1TG1SbTAsSrZUpOAa0rtz5Qq2F_ze5gV3T5W-TIWlI3IK91XPIo"/>
-<span class="text-headline-md font-headline-md font-bold text-primary">Tanna Dental</span>
+<span class="text-lg sm:text-headline-md font-headline-md font-bold text-primary">Tanna Dental</span>
 </div>
 <nav class="hidden md:flex items-center gap-10">
 <a class="text-primary font-bold border-b-2 border-secondary font-label-md text-label-md py-1" href="#">Home</a>
@@ -128,7 +170,7 @@
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#team">Our Team</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="sign.html">Patient Portal (Login)</a>
 </nav>
-<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95" onclick="window.location.href='appointment.html'">
+<button class="hidden sm:block bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95" onclick="window.location.href='appointment.html'">
                 Book Appointment
             </button>
 </div>
@@ -139,7 +181,7 @@
 <img class="w-full h-full object-cover" data-alt="A luxurious and ultra-modern dental clinic operatory with large windows, soft ambient lighting, and state-of-the-art equipment. The scene is clean, sterile, and calming, featuring a palette of whites and soft blues. High-key lighting creates a bright, welcoming boutique atmosphere that feels more like a high-end spa than a traditional medical office." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHp9dAi41hFBJuMe-dXE4wYXQci_VJ_LHS5ezLzpcigKKt9U-B68BtDA-pG5sWQjen2xd_lroNqCKmUgqpjKSln_vgOzx4UGA98HaE5Nnw9zSD-OBdW2Vq29i9OI3ekLwqn5nvYWZHsRTkW8-v9AYyv11kKrIiFC-U77yOHzXNl_3CCilkUnYnCUsE2wKuA6NIQzbrf_6LxCCMt6tZONvVFgxQqrscTTCGnaCGr30scNMpfnyPXXOyGV8GNCAy5pqwHKy32N_ldZE"/>
 <div class="absolute inset-0 hero-gradient"></div>
 </div>
-<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop w-full">
+<div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
 <div class="max-w-2xl">
 <span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-md text-label-md mb-6">
                     Welcome to Boutique Dentistry
@@ -150,11 +192,11 @@
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
                     Experience a new standard of care led by Dr. Dinesh Tanna in a serene, boutique environment designed for your comfort and wellness.
                 </p>
-<div class="flex items-center gap-4">
-<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-md text-label-md hover:opacity-90 transition-all flex items-center gap-2" onclick="window.location.href='appointment.html'">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+<button class="w-full sm:w-auto justify-center bg-primary text-on-primary px-8 sm:px-10 py-4 rounded-full font-label-md text-label-md hover:opacity-90 transition-all flex items-center gap-2" onclick="window.location.href='appointment.html'">
                         Book Appointment <span class="material-symbols-outlined text-[20px]">calendar_today</span>
 </button>
-<button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-full font-label-md text-label-md hover:bg-secondary-container/80 transition-all flex items-center gap-2" onclick="document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' })">
+<button class="w-full sm:w-auto justify-center bg-secondary-container text-on-secondary-container px-8 sm:px-10 py-4 rounded-full font-label-md text-label-md hover:bg-secondary-container/80 transition-all flex items-center gap-2" onclick="document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' })">
                         View Gallery <span class="material-symbols-outlined text-[20px]">photo_library</span>
 </button>
 </div>

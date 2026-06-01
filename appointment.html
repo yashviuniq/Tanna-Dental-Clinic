@@ -71,6 +71,28 @@ body {
 .booking-card {
   box-shadow: 0px 4px 20px rgba(10, 37, 64, 0.05);
 }
+
+@media (max-width: 767px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+
+  h2 {
+    font-size: 32px !important;
+    line-height: 40px !important;
+  }
+
+  .booking-card {
+    border-radius: 20px !important;
+    padding: 24px !important;
+  }
+}
 </style>
 
 </head>
@@ -107,7 +129,7 @@ body {
     <!-- Back Button -->
     <button
       onclick="window.location.href='dashboard.html'"
-      class="flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-xl hover:opacity-90 transition-all">
+      class="hidden sm:flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-xl hover:opacity-90 transition-all">
 
       <span class="material-symbols-outlined text-[20px]">
         arrow_back
@@ -122,7 +144,7 @@ body {
 </header>
 
 <!-- MAIN -->
-<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12">
 
   <!-- TITLE -->
   <div class="text-center mb-16">
@@ -135,7 +157,7 @@ body {
       Appointment Booking
     </div>
 
-    <h2 class="font-heading text-5xl font-bold text-primary mb-5">
+    <h2 class="font-heading text-4xl md:text-5xl font-bold text-primary mb-5">
       Schedule Your Visit
     </h2>
 
@@ -146,10 +168,10 @@ body {
   </div>
 
   <!-- FORM SECTION -->
-  <div class="grid lg:grid-cols-2 gap-10 items-start">
+  <div class="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
 
     <!-- LEFT -->
-    <div class="bg-white rounded-3xl p-8 booking-card border border-surface-container-highest">
+    <div class="bg-white rounded-3xl p-6 md:p-8 booking-card border border-surface-container-highest">
 
       <h3 class="font-heading text-2xl font-bold text-primary mb-8">
         Appointment Details
@@ -280,7 +302,7 @@ body {
 <div class="space-y-6">
 
   <!-- WHY CHOOSE US -->
-  <div class="bg-white rounded-3xl p-8 booking-card border border-surface-container-highest">
+  <div class="bg-white rounded-3xl p-6 md:p-8 booking-card border border-surface-container-highest">
 
     <div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center mb-6">
 
@@ -349,7 +371,7 @@ body {
   </div>
 
   <!-- QUICK CONTACT -->
-  <div class="bg-primary rounded-3xl p-8 text-white">
+  <div class="bg-primary rounded-3xl p-6 md:p-8 text-white">
 
     <h3 class="font-heading text-2xl font-bold mb-6">
       Need Assistance?
