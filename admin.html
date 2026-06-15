@@ -111,6 +111,10 @@ tailwind.config = {
         <span class="material-symbols-outlined text-[20px]">calendar_month</span>
         Appointments
       </div>
+      <div class="sidebar-link" onclick="showSection('contacts')">
+        <span class="material-symbols-outlined text-[20px]">contact_phone</span>
+        Contact Details
+      </div>
     </nav>
 
     <!-- Logout -->
@@ -195,6 +199,10 @@ tailwind.config = {
               <span class="material-symbols-outlined text-secondary">calendar_today</span>
               <span class="font-semibold text-sm text-on-surface">View Appointments</span>
             </button>
+            <button onclick="showSection('contacts')" class="flex items-center gap-3 p-4 bg-surface-container-low hover:bg-secondary-container rounded-xl transition-colors text-left">
+              <span class="material-symbols-outlined text-secondary">contact_phone</span>
+              <span class="font-semibold text-sm text-on-surface">Manage Contact Details</span>
+            </button>
           </div>
         </div>
       </div>
@@ -266,6 +274,26 @@ tailwind.config = {
                 </td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT DETAILS SECTION -->
+      <div id="section-contacts" class="hidden">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="font-heading font-bold text-primary text-lg">Manage Contact Details</h2>
+            <p class="text-on-surface-variant text-sm mt-0.5">Add, edit, hide or remove contact details shown on the website</p>
+          </div>
+          <button onclick="openContactModal()" class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            Add Contact
+          </button>
+        </div>
+        <div id="contactsList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div class="text-center py-12 text-on-surface-variant md:col-span-2 xl:col-span-3">
+            <span class="material-symbols-outlined text-[48px] opacity-30">contact_phone</span>
+            <p class="mt-2 font-semibold">Loading contact details...</p>
           </div>
         </div>
       </div>
@@ -344,11 +372,71 @@ tailwind.config = {
   </div>
 </div>
 
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4" style="display:none;">
+  <div class="bg-white rounded-2xl w-full max-w-lg card-shadow">
+    <div class="flex items-center justify-between p-6 border-b border-surface-container-highest">
+      <h3 class="font-heading font-bold text-primary text-lg" id="contactModalTitle">Add Contact</h3>
+      <button onclick="closeContactModal()" class="text-on-surface-variant hover:text-primary">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <input type="hidden" id="contactId"/>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1">Label *</label>
+          <input id="contactLabel" type="text" placeholder="e.g. Appointment Booking"
+            class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1">Type *</label>
+          <select id="contactType" class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm">
+            <option value="phone">Phone</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="email">Email</option>
+            <option value="instagram">Instagram</option>
+            <option value="address">Address</option>
+            <option value="hours">Clinic Hours</option>
+            <option value="link">Website Link</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Value *</label>
+        <input id="contactValue" type="text" placeholder="Phone, email, URL, address or timings"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Display Text</label>
+        <input id="contactDisplayText" type="text" placeholder="Leave blank to use the value"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1">Display Order</label>
+          <input id="contactOrder" type="number" min="0" value="0"
+            class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+        </div>
+        <label class="flex items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 text-sm font-semibold text-on-surface-variant">
+          <input id="contactActive" type="checkbox" checked class="rounded border-outline-variant text-primary focus:ring-primary"/>
+          Visible on website
+        </label>
+      </div>
+      <div id="contactError" class="hidden bg-error-container text-on-error-container text-sm font-semibold px-4 py-3 rounded-xl"></div>
+    </div>
+    <div class="p-6 pt-0 flex gap-3">
+      <button onclick="closeContactModal()" class="flex-1 h-11 border border-outline-variant rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+      <button onclick="saveContact()" id="saveContactBtn" class="flex-1 h-11 bg-primary text-on-primary rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">Save Contact</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ─── NAVIGATION ───────────────────────────────────────────
-const sections = ['dashboard','services','gallery','appointments'];
-const titles = { dashboard:'Dashboard', services:'Services', gallery:'Gallery', appointments:'Appointments' };
-const subtitles = { dashboard:'Welcome back, Admin', services:'Manage your clinic services', gallery:'Manage clinic photos', appointments:'View patient appointments' };
+const sections = ['dashboard','services','gallery','appointments','contacts'];
+const titles = { dashboard:'Dashboard', services:'Services', gallery:'Gallery', appointments:'Appointments', contacts:'Contact Details' };
+const subtitles = { dashboard:'Welcome back, Admin', services:'Manage your clinic services', gallery:'Manage clinic photos', appointments:'View patient appointments', contacts:'Manage website contact information' };
 
 function showSection(name, trigger = null) {
   sections.forEach(s => {
@@ -366,6 +454,7 @@ function showSection(name, trigger = null) {
   if (name === 'services') loadServices();
   if (name === 'gallery') loadGallery();
   if (name === 'appointments') loadAppointments();
+  if (name === 'contacts') loadContacts();
   if (name === 'dashboard') loadStats();
 }
 
@@ -525,10 +614,42 @@ async function deleteService(id) {
 async function loadGallery() {
   const el = document.getElementById('galleryList');
 
+  const { data: galleryItems, error: galleryError } = await supabaseClient
+    .from('gallery')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(48);
+
+  if (!galleryError && galleryItems && galleryItems.length > 0) {
+    const tableGalleryItems = galleryItems.map(item => {
+      const storagePath = item.storage_path || item.file_path || item.path || item.file_name || item.name;
+      let mediaUrl = item.image_url || item.media_url || item.url || item.public_url;
+      const isVideo = /video/i.test(item.media_type || item.type || '') || /\.(mp4|mov|ogg|webm)$/i.test(mediaUrl || storagePath || '');
+
+      if (storagePath) {
+        mediaUrl = getGalleryPublicUrl(storagePath, isVideo) || mediaUrl;
+      }
+
+      return {
+        id: item.id,
+        url: mediaUrl,
+        fallbackUrl: storagePath ? getGalleryOriginalUrl(storagePath) : mediaUrl,
+        name: item.caption || item.title || storagePath || 'Gallery media',
+        storagePath,
+        isVideo
+      };
+    }).filter(item => item.url);
+
+    if (tableGalleryItems.length > 0) {
+      renderGalleryItems(tableGalleryItems);
+      return;
+    }
+  }
+
   const { data, error } = await supabaseClient.storage
     .from('gallery')
     .list('', {
-      limit: 100,
+      limit: 48,
       sortBy: { column: 'created_at', order: 'desc' }
     });
 
@@ -539,7 +660,12 @@ async function loadGallery() {
     return;
   }
 
-  if (!data || data.length === 0) {
+  const files = (data || []).filter(file => {
+    const name = file.name || '';
+    return /\.(avif|gif|jpe?g|png|webp|mp4|mov|ogg|webm)$/i.test(name);
+  });
+
+  if (files.length === 0) {
     el.innerHTML = `<div class="text-center py-12 text-on-surface-variant col-span-4">
       <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
       <p class="mt-2 font-semibold">No media yet</p>
@@ -548,27 +674,54 @@ async function loadGallery() {
     return;
   }
 
-  el.innerHTML = data.map(file => {
-    const { data: urlData } = supabaseClient.storage
-      .from('gallery')
-      .getPublicUrl(file.name);
-
-    const url = urlData.publicUrl;
+  renderGalleryItems(files.map(file => {
     const isVideo = /\.(mp4|webm|ogg|mov)$/i.test(file.name);
 
-   return `
+    return {
+      url: getGalleryPublicUrl(file.name, isVideo),
+      fallbackUrl: getGalleryOriginalUrl(file.name),
+      name: file.name,
+      storagePath: file.name,
+      isVideo
+    };
+  }));
+}
+
+function renderGalleryItems(items) {
+  const el = document.getElementById('galleryList');
+
+  if (!items || items.length === 0) {
+    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant col-span-4">
+      <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
+      <p class="mt-2 font-semibold">No media yet</p>
+      <p class="text-sm opacity-70">Upload images or videos</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = items.map(item => {
+    const url = escapeHtml(item.url);
+    const fallbackUrl = escapeHtml(item.fallbackUrl || item.url);
+    const mediaName = escapeHtml(item.name);
+    const storagePath = escapeJsString(item.storagePath || '');
+    const itemId = escapeJsString(item.id || '');
+    const imageFallback = !item.isVideo && fallbackUrl !== url
+      ? ` onerror="this.onerror=null;this.src='${fallbackUrl}'"`
+      : '';
+
+    return `
   <div class="relative group rounded-2xl overflow-hidden bg-surface-container aspect-square">
 
     ${
-      isVideo
-        ? `<video src="${url}" controls muted class="w-full h-full object-cover"></video>`
-        : `<img src="${url}" class="w-full h-full object-cover"/>`
+      item.isVideo
+        ? `<video src="${url}" controls preload="metadata" muted class="w-full h-full object-cover"></video>`
+        : `<img src="${url}"${imageFallback} alt="${mediaName}" loading="lazy" decoding="async" width="360" height="360" class="w-full h-full object-cover"/>`
     }
 
     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
 
       <button
-        onclick="deleteGallery('${file.name}')"
+        onclick="deleteGallery('${storagePath}', '${itemId}')"
         class="bg-white text-error px-4 py-2 rounded-xl text-sm font-bold hover:bg-error-container transition-colors">
 
         Delete
@@ -580,6 +733,30 @@ async function loadGallery() {
   </div>
 `;
   }).join('');
+}
+
+function getGalleryPublicUrl(storagePath, isVideo = false) {
+  if (!storagePath) return '';
+
+  const options = isVideo
+    ? undefined
+    : { transform: { width: 420, height: 420, resize: 'cover', quality: 70 } };
+
+  const { data: urlData } = supabaseClient.storage
+    .from('gallery')
+    .getPublicUrl(storagePath, options);
+
+  return urlData.publicUrl;
+}
+
+function getGalleryOriginalUrl(storagePath) {
+  if (!storagePath) return '';
+
+  const { data: urlData } = supabaseClient.storage
+    .from('gallery')
+    .getPublicUrl(storagePath);
+
+  return urlData.publicUrl;
 }
 
 function openGalleryModal() {
@@ -595,6 +772,7 @@ function closeGalleryModal() {
 
 async function saveGallery() {
   const file = document.getElementById('galleryImage').files[0];
+  const caption = document.getElementById('galleryCaption').value.trim();
   const btn = document.getElementById('saveGalleryBtn');
   const errorEl = document.getElementById('galleryError');
 
@@ -625,23 +803,245 @@ async function saveGallery() {
     return;
   }
 
+  const { data: urlData } = supabaseClient.storage
+    .from('gallery')
+    .getPublicUrl(fileName);
+
+  const dbError = await insertGalleryRecord({
+    caption,
+    image_url: urlData.publicUrl,
+    media_url: urlData.publicUrl,
+    url: urlData.publicUrl,
+    storage_path: fileName,
+    file_name: fileName,
+    media_type: file.type || (file.type.startsWith('video/') ? 'video' : 'image')
+  });
+
+  if (dbError) {
+    console.warn('Gallery table insert failed:', dbError.message);
+  }
+
   closeGalleryModal();
   loadGallery();
   loadStats();
 }
 
-async function deleteGallery(fileName) {
+async function insertGalleryRecord(record) {
+  const payloads = [
+    record,
+    {
+      caption: record.caption,
+      image_url: record.image_url,
+      storage_path: record.storage_path,
+      media_type: record.media_type
+    },
+    {
+      caption: record.caption,
+      image_url: record.image_url,
+      file_name: record.file_name,
+      media_type: record.media_type
+    },
+    {
+      image_url: record.image_url,
+      storage_path: record.storage_path
+    },
+    {
+      image_url: record.image_url
+    },
+    {
+      url: record.url
+    }
+  ];
+
+  let lastError = null;
+
+  for (const payload of payloads) {
+    const cleanPayload = Object.fromEntries(
+      Object.entries(payload).filter(([, value]) => value !== undefined && value !== null && value !== '')
+    );
+    const { error } = await supabaseClient.from('gallery').insert(cleanPayload);
+
+    if (!error) return null;
+
+    lastError = error;
+    if (!/column|schema|cache|Could not find/i.test(error.message || '')) break;
+  }
+
+  return lastError;
+}
+
+async function deleteGallery(fileName, id = '') {
   if (!confirm('Delete this media?')) return;
 
-  await supabaseClient.storage
-    .from('gallery')
-    .remove([fileName]);
+  if (id) {
+    await supabaseClient.from('gallery').delete().eq('id', id);
+  }
+
+  if (fileName) {
+    await supabaseClient.storage
+      .from('gallery')
+      .remove([fileName]);
+  }
 
   loadGallery();
   loadStats();
 }
 
 // ─── APPOINTMENTS ─────────────────────────────────────────
+let editingContactId = null;
+
+async function loadContacts() {
+  const el = document.getElementById('contactsList');
+  const { data, error } = await supabaseClient
+    .from('contact_details')
+    .select('*')
+    .order('display_order', { ascending: true })
+    .order('created_at', { ascending: true });
+
+  if (error) {
+    el.innerHTML = `<div class="text-center py-12 text-error md:col-span-2 xl:col-span-3">
+      Failed to load contact details: ${escapeHtml(error.message)}
+      <p class="text-on-surface-variant text-sm mt-2">Create the contact_details table using contact_details_schema.sql.</p>
+    </div>`;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant md:col-span-2 xl:col-span-3">
+      <span class="material-symbols-outlined text-[48px] opacity-30">contact_phone</span>
+      <p class="mt-2 font-semibold">No contact details yet</p>
+      <p class="text-sm opacity-70">Click "Add Contact" to get started</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = data.map(contact => {
+    const isActive = contact.is_active !== false;
+    const displayText = contact.display_text || contact.value || '';
+    return `
+      <div class="bg-white rounded-2xl card-shadow border border-surface-container-highest p-5">
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="material-symbols-outlined text-secondary text-[20px]">${contactIcon(contact.type)}</span>
+              <h3 class="font-heading font-bold text-primary text-base truncate">${escapeHtml(contact.label)}</h3>
+            </div>
+            <p class="text-xs uppercase tracking-wider font-bold text-on-surface-variant">${escapeHtml(contact.type || 'contact')}</p>
+          </div>
+          <span class="text-xs font-bold px-2 py-1 rounded-full ${isActive ? 'bg-green-100 text-green-800' : 'bg-surface-container text-on-surface-variant'}">
+            ${isActive ? 'Visible' : 'Hidden'}
+          </span>
+        </div>
+        <p class="text-sm font-semibold text-on-surface break-all">${escapeHtml(displayText)}</p>
+        <p class="text-xs text-on-surface-variant mt-1 break-all">${escapeHtml(contact.value || '')}</p>
+        <div class="flex gap-2 mt-4">
+          <button onclick="editContact('${contact.id}')" class="flex-1 text-xs font-semibold py-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">Edit</button>
+          <button onclick="deleteContact('${contact.id}')" class="flex-1 text-xs font-semibold py-2 border border-error-container text-error rounded-lg hover:bg-error-container transition-colors">Delete</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openContactModal(contact = null) {
+  editingContactId = contact?.id || null;
+  document.getElementById('contactId').value = contact?.id || '';
+  document.getElementById('contactLabel').value = contact?.label || '';
+  document.getElementById('contactType').value = contact?.type || 'phone';
+  document.getElementById('contactValue').value = contact?.value || '';
+  document.getElementById('contactDisplayText').value = contact?.display_text || '';
+  document.getElementById('contactOrder').value = contact?.display_order ?? 0;
+  document.getElementById('contactActive').checked = contact?.is_active !== false;
+  document.getElementById('contactModalTitle').textContent = contact ? 'Edit Contact' : 'Add Contact';
+  document.getElementById('contactError').classList.add('hidden');
+  document.getElementById('contactModal').style.display = 'flex';
+}
+
+async function editContact(id) {
+  const { data, error } = await supabaseClient.from('contact_details').select('*').eq('id', id).single();
+  if (error) {
+    alert(error.message);
+    return;
+  }
+  openContactModal(data);
+}
+
+function closeContactModal() {
+  document.getElementById('contactModal').style.display = 'none';
+}
+
+async function saveContact() {
+  const label = document.getElementById('contactLabel').value.trim();
+  const type = document.getElementById('contactType').value;
+  const value = document.getElementById('contactValue').value.trim();
+  const displayText = document.getElementById('contactDisplayText').value.trim();
+  const displayOrder = Number(document.getElementById('contactOrder').value || 0);
+  const isActive = document.getElementById('contactActive').checked;
+  const btn = document.getElementById('saveContactBtn');
+  const errorEl = document.getElementById('contactError');
+
+  if (!label) { showFormError(errorEl, 'Label is required.'); return; }
+  if (!value) { showFormError(errorEl, 'Value is required.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  errorEl.classList.add('hidden');
+
+  const payload = {
+    label,
+    type,
+    value,
+    display_text: displayText,
+    display_order: Number.isFinite(displayOrder) ? displayOrder : 0,
+    is_active: isActive
+  };
+
+  let error;
+  if (editingContactId) {
+    ({ error } = await supabaseClient.from('contact_details').update(payload).eq('id', editingContactId));
+  } else {
+    ({ error } = await supabaseClient.from('contact_details').insert(payload));
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Save Contact';
+
+  if (error) {
+    showFormError(errorEl, getContactSaveErrorMessage(error));
+    return;
+  }
+  closeContactModal();
+  loadContacts();
+}
+
+function getContactSaveErrorMessage(error) {
+  const message = error?.message || "Could not save contact detail.";
+
+  if (/contact_details|schema cache|could not find the table/i.test(message)) {
+    return "Contact Details table is missing in Supabase. Run contact_details_schema.sql in Supabase SQL Editor, then refresh this dashboard.";
+  }
+
+  return message;
+}
+
+async function deleteContact(id) {
+  if (!confirm('Delete this contact detail?')) return;
+  await supabaseClient.from('contact_details').delete().eq('id', id);
+  loadContacts();
+}
+
+function contactIcon(type) {
+  return ({
+    phone: 'call',
+    whatsapp: 'chat',
+    email: 'mail',
+    instagram: 'photo_camera',
+    address: 'location_on',
+    hours: 'schedule',
+    link: 'link'
+  })[type] || 'contact_phone';
+}
+
 async function loadAppointments() {
   const { data, error } = await supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
   const el = document.getElementById('appointmentsList');
@@ -729,6 +1129,10 @@ function escapeHtml(value) {
     '"': '&quot;',
     "'": '&#39;'
   }[char]));
+}
+
+function escapeJsString(value) {
+  return String(value ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 }
 
 // Load stats on start

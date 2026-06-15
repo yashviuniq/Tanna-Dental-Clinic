@@ -411,20 +411,19 @@
 </div>
 <div>
 <h4 class="font-headline-md text-headline-md text-primary mb-8">Contact Us</h4>
-<ul class="space-y-4">
+<ul class="space-y-4" id="footerContactList">
 <li class="flex items-start gap-3 text-on-surface-variant">
 <span class="material-symbols-outlined text-secondary">location_on</span>
-<span>123 Luxury Avenue,<br/>Premium District, City 90210</span>
+<span>Nagpur, Maharashtra</span>
 </li>
 <li class="flex items-center gap-3 text-on-surface-variant">
 <span class="material-symbols-outlined text-secondary">call</span>
-<span>+91 712 357 3986</span>
+<a class="hover:text-secondary transition-colors" href="tel:+917123573986">+91 712 357 3986</a>
 </li>
 <li class="flex items-center gap-3 text-on-surface-variant">
 <span class="material-symbols-outlined text-secondary">schedule</span>
 <span>Mon-Fri: Morning 10:30AM - 2PM 
 <br/> Evening 6:00PM - 8:30PM<br/>Sun: Closed</span>
-</span>
 </li>
 </ul>
 </div>
@@ -569,11 +568,41 @@ async function loadGallery() {
   const galleryGrid =
     document.getElementById("galleryGrid");
 
+  const { data: galleryItems, error: galleryError } = await supabaseClient
+    .from("gallery")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(24);
+
+  if (!galleryError && galleryItems && galleryItems.length > 0) {
+    const tableGalleryItems = galleryItems.map(item => {
+      const storagePath = item.storage_path || item.file_path || item.path || item.file_name || item.name;
+      let mediaUrl = item.image_url || item.media_url || item.url || item.public_url;
+      const isVideo = /video/i.test(item.media_type || item.type || "") || /\.(mp4|mov|ogg|webm)$/i.test(mediaUrl || storagePath || "");
+
+      if (storagePath) {
+        mediaUrl = getGalleryPublicUrl(storagePath, isVideo) || mediaUrl;
+      }
+
+      return {
+        url: mediaUrl,
+        fallbackUrl: storagePath ? getGalleryOriginalUrl(storagePath) : mediaUrl,
+        name: item.caption || item.title || storagePath || "Gallery media",
+        isVideo
+      };
+    }).filter(item => item.url);
+
+    if (tableGalleryItems.length > 0) {
+      renderGalleryItems(tableGalleryItems);
+      return;
+    }
+  }
+
   const { data, error } =
     await supabaseClient.storage
       .from("gallery")
       .list("", {
-        limit: 100,
+        limit: 24,
         sortBy: { column: "created_at", order: "desc" }
       });
 
@@ -602,29 +631,75 @@ async function loadGallery() {
     return;
   }
 
-  galleryGrid.innerHTML = "";
-
-  files.forEach(file => {
-    const fileName = escapeHtml(file.name);
-    const { data: urlData } = supabaseClient.storage
-      .from("gallery")
-      .getPublicUrl(file.name);
-
-    const url = urlData.publicUrl;
+  renderGalleryItems(files.map(file => {
     const isVideo = /\.(mp4|mov|ogg|webm)$/i.test(file.name);
 
-    galleryGrid.innerHTML += `
+    return {
+      url: getGalleryPublicUrl(file.name, isVideo),
+      fallbackUrl: getGalleryOriginalUrl(file.name),
+      name: file.name,
+      isVideo
+    };
+  }));
+
+}
+
+function renderGalleryItems(items) {
+  const galleryGrid = document.getElementById("galleryGrid");
+
+  if (!items || items.length === 0) {
+    galleryGrid.innerHTML = `
+      <div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3">
+        <span class="material-symbols-outlined text-[48px] opacity-30">photo_library</span>
+        <p class="mt-2 font-label-md text-label-md">No gallery media yet.</p>
+      </div>
+    `;
+    return;
+  }
+
+  galleryGrid.innerHTML = items.map(item => {
+    const url = escapeHtml(item.url);
+    const fallbackUrl = escapeHtml(item.fallbackUrl || item.url);
+    const mediaName = escapeHtml(item.name);
+    const imageFallback = !item.isVideo && fallbackUrl !== url
+      ? ` onerror="this.onerror=null;this.src='${fallbackUrl}'"`
+      : "";
+
+    return `
       <div class="group relative overflow-hidden rounded-3xl premium-shadow">
 
         ${
-          isVideo
-            ? `<video src="${url}" controls muted playsinline class="w-full h-[320px] bg-black object-cover"></video>`
-            : `<img src="${url}" alt="Tanna Dental gallery media: ${fileName}" class="w-full h-[320px] object-cover transition-transform duration-500 group-hover:scale-110"/>`
+          item.isVideo
+            ? `<video src="${url}" controls preload="metadata" muted playsinline class="w-full h-[320px] bg-black object-cover"></video>`
+            : `<img src="${url}"${imageFallback} alt="Tanna Dental gallery media: ${mediaName}" loading="lazy" decoding="async" width="720" height="420" class="w-full h-[320px] object-cover transition-transform duration-500 group-hover:scale-110"/>`
         }
       </div>
     `;
-  });
+  }).join("");
+}
 
+function getGalleryPublicUrl(storagePath, isVideo = false) {
+  if (!storagePath) return "";
+
+  const options = isVideo
+    ? undefined
+    : { transform: { width: 900, height: 560, resize: "cover", quality: 70 } };
+
+  const { data: urlData } = supabaseClient.storage
+    .from("gallery")
+    .getPublicUrl(storagePath, options);
+
+  return urlData.publicUrl;
+}
+
+function getGalleryOriginalUrl(storagePath) {
+  if (!storagePath) return "";
+
+  const { data: urlData } = supabaseClient.storage
+    .from("gallery")
+    .getPublicUrl(storagePath);
+
+  return urlData.publicUrl;
 }
 
 function escapeHtml(value) {
@@ -637,8 +712,66 @@ function escapeHtml(value) {
   }[char]));
 }
 
+async function loadContactDetails() {
+  const footerList = document.getElementById("footerContactList");
+  if (!footerList) return;
+
+  const { data, error } = await supabaseClient
+    .from("contact_details")
+    .select("*")
+    .eq("is_active", true)
+    .order("display_order", { ascending: true })
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    if (error) console.warn("Could not load contact details:", error.message);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    footerList.innerHTML = "";
+    return;
+  }
+
+  footerList.innerHTML = data.map(contact => `
+    <li class="flex items-start gap-3 text-on-surface-variant">
+      <span class="material-symbols-outlined text-secondary">${contactIcon(contact.type)}</span>
+      ${contactHref(contact)
+        ? `<a class="hover:text-secondary transition-colors break-all" href="${escapeHtml(contactHref(contact))}" ${contactTarget(contact.type)}>${escapeHtml(contact.display_text || contact.value)}</a>`
+        : `<span class="break-words">${escapeHtml(contact.display_text || contact.value)}</span>`}
+    </li>
+  `).join("");
+}
+
+function contactHref(contact) {
+  const value = String(contact.value || "").trim();
+  if (!value) return "";
+  if (contact.type === "phone") return `tel:${value.replace(/[^+\d]/g, "")}`;
+  if (contact.type === "whatsapp") return `https://wa.me/${value.replace(/\D/g, "")}`;
+  if (contact.type === "email") return `mailto:${value}`;
+  if (contact.type === "instagram" || contact.type === "link") return value.startsWith("http") ? value : `https://${value}`;
+  return "";
+}
+
+function contactTarget(type) {
+  return ["instagram", "link", "whatsapp"].includes(type) ? 'target="_blank" rel="noopener"' : "";
+}
+
+function contactIcon(type) {
+  return ({
+    phone: "call",
+    whatsapp: "chat",
+    email: "mail",
+    instagram: "photo_camera",
+    address: "location_on",
+    hours: "schedule",
+    link: "link"
+  })[type] || "contact_phone";
+}
+
 renderTreatments();
 loadGallery();
+loadContactDetails();
 
 </script>
 <script src="pwa.js"></script>

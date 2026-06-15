@@ -377,7 +377,7 @@ body {
       Need Assistance?
     </h3>
 
-    <div class="space-y-5">
+    <div class="space-y-5" id="quickContactList">
 
       <!-- PHONE -->
       <a
@@ -503,7 +503,7 @@ body {
       Contact Tanna Dental Clinic
     </h3>
 
-    <div class="space-y-6">
+    <div class="space-y-6" id="fullContactList">
 
       <!-- LANDLINE -->
       <div class="flex items-start gap-4">
@@ -770,6 +770,112 @@ body {
     const appointmentSubmit = document.getElementById('appointmentSubmit');
     const preferredDateInput = appointmentForm.elements.preferred_date;
 
+    async function loadContactDetails() {
+      const quickList = document.getElementById('quickContactList');
+      const fullList = document.getElementById('fullContactList');
+
+      const { data, error } = await supabaseClient
+        .from('contact_details')
+        .select('*')
+        .eq('is_active', true)
+        .order('display_order', { ascending: true })
+        .order('created_at', { ascending: true });
+
+      if (error) {
+        if (error) console.warn('Could not load contact details:', error.message);
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        if (quickList) quickList.innerHTML = '';
+        if (fullList) fullList.innerHTML = '';
+        return;
+      }
+
+      if (quickList) {
+        quickList.innerHTML = data
+          .filter(contact => ['phone', 'whatsapp', 'email', 'instagram', 'link'].includes(contact.type))
+          .slice(0, 5)
+          .map(contact => renderQuickContact(contact))
+          .join('');
+      }
+
+      if (fullList) {
+        fullList.innerHTML = data.map(contact => renderFullContact(contact)).join('');
+      }
+    }
+
+    function renderQuickContact(contact) {
+      const href = contactHref(contact);
+      const content = `
+        <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-white">${contactIcon(contact.type)}</span>
+        </div>
+        <div class="min-w-0">
+          <p class="text-sm text-white/70">${escapeHtml(contact.label)}</p>
+          <p class="font-semibold break-all">${escapeHtml(contact.display_text || contact.value)}</p>
+        </div>
+      `;
+
+      return href
+        ? `<a href="${escapeHtml(href)}" ${contactTarget(contact.type)} class="flex items-center gap-4 hover:opacity-80 transition-all">${content}</a>`
+        : `<div class="flex items-center gap-4">${content}</div>`;
+    }
+
+    function renderFullContact(contact) {
+      const href = contactHref(contact);
+      const text = escapeHtml(contact.display_text || contact.value);
+      return `
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-primary">${contactIcon(contact.type)}</span>
+          </div>
+          <div class="min-w-0">
+            <p class="text-sm text-on-surface-variant mb-1">${escapeHtml(contact.label)}</p>
+            ${href
+              ? `<a href="${escapeHtml(href)}" ${contactTarget(contact.type)} class="font-semibold text-primary hover:text-secondary transition-colors break-all">${text}</a>`
+              : `<p class="font-semibold text-primary break-words">${text}</p>`}
+          </div>
+        </div>
+      `;
+    }
+
+    function contactHref(contact) {
+      const value = String(contact.value || '').trim();
+      if (!value) return '';
+      if (contact.type === 'phone') return `tel:${value.replace(/[^+\d]/g, '')}`;
+      if (contact.type === 'whatsapp') return `https://wa.me/${value.replace(/\D/g, '')}`;
+      if (contact.type === 'email') return `mailto:${value}`;
+      if (contact.type === 'instagram' || contact.type === 'link') return value.startsWith('http') ? value : `https://${value}`;
+      return '';
+    }
+
+    function contactTarget(type) {
+      return ['instagram', 'link', 'whatsapp'].includes(type) ? 'target="_blank" rel="noopener"' : '';
+    }
+
+    function contactIcon(type) {
+      return ({
+        phone: 'call',
+        whatsapp: 'chat',
+        email: 'mail',
+        instagram: 'photo_camera',
+        address: 'location_on',
+        hours: 'schedule',
+        link: 'link'
+      })[type] || 'contact_phone';
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+    }
+
     function getTodayDateString() {
       const now = new Date();
       const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -778,6 +884,7 @@ body {
     }
 
     preferredDateInput.min = getTodayDateString();
+    loadContactDetails();
 
     function showAppointmentMessage(message, type) {
       appointmentMessage.textContent = message;
