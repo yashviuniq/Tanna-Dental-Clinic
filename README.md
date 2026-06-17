@@ -58,3 +58,19 @@ Yashvi Thakkar
 ---
 
 
+## Admin Notification Setup
+
+Appointment booking can notify the admin by email and WhatsApp through the Vercel API function at `/api/appointment-notification`.
+
+Set these environment variables in Vercel:
+
+* `RESEND_API_KEY` - Resend API key for sending email
+* `NOTIFICATION_FROM_EMAIL` - verified sender email in Resend, for example `Tanna Dental <appointments@yourdomain.com>`
+* `WHATSAPP_TOKEN` - Meta WhatsApp Cloud API access token
+* `WHATSAPP_PHONE_NUMBER_ID` - Meta WhatsApp phone number ID
+* `WHATSAPP_API_VERSION` - optional Meta Graph API version, defaults to `v26.0`
+
+By default, notifications go to `drdineshtanna79@gmail.com`, `1675.yashvi@gmail.com`, WhatsApp `919860703424`, and WhatsApp `917820840535`. To change these later, set comma-separated `ADMIN_EMAIL` or `ADMIN_WHATSAPP_TO` values in Vercel.
+
+After adding or changing Vercel environment variables, redeploy the project.
+

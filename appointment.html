@@ -938,10 +938,30 @@ body {
         return;
       }
 
+      notifyAdmin(payload);
       appointmentForm.reset();
       preferredDateInput.min = today;
       showAppointmentMessage('Appointment request submitted. Our team will contact you soon.', 'success');
     });
+
+    async function notifyAdmin(payload) {
+      try {
+        const response = await fetch('/api/appointment-notification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const details = await response.text();
+          console.error('Appointment notification failed:', details);
+        }
+      } catch (error) {
+        console.error('Appointment notification failed:', error);
+      }
+    }
 
     async function insertAppointment(payload) {
       const allowedPayload = { ...payload };
