@@ -54,7 +54,8 @@ values
   ('Secondary Email', 'email', 'drdineshtanna79@yahoo.com', 'drdineshtanna79@yahoo.com', 50, true),
   ('Instagram', 'instagram', 'https://www.instagram.com/tannadr?igsh=MWlrcHY2eG1na2NzNw==', '@tannadr', 60, true),
   ('Clinic Location', 'address', 'Nagpur, Maharashtra', 'Nagpur, Maharashtra', 70, true),
-  ('Clinic Hours', 'hours', 'Mon-Fri: Morning 10:30AM - 2PM, Evening 6:00PM - 8:30PM. Sun: Closed', 'Mon-Fri: Morning 10:30AM - 2PM, Evening 6:00PM - 8:30PM. Sun: Closed', 80, true)
+  ('Clinic Hours', 'hours', 'Mon-Fri: Morning 10:30AM - 2PM, Evening 6:00PM - 8:30PM. Sun: Closed', 'Mon-Fri: Morning 10:30AM - 2PM, Evening 6:00PM - 8:30PM. Sun: Closed', 80, true),
+  ('UPI Payment', 'upi', 'drdineshtanna79@okhdfcbank', 'drdineshtanna79@okhdfcbank', 90, true)
 on conflict (type, value) do nothing;
 
 notify pgrst, 'reload schema';

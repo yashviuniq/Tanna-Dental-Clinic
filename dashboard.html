@@ -334,6 +334,34 @@ Read All Reviews <span class="material-symbols-outlined">arrow_forward</span>
 </div>
 </section>
 
+<!-- Payment Section -->
+<section id="payment" class="py-section-gap bg-surface scroll-mt-24">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">Payments</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Payment</h2>
+<p class="text-on-surface-variant font-body-lg max-w-2xl mx-auto">Scan the QR code with any UPI app (GPay, PhonePe, Paytm) or pay directly using our UPI ID.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-center">
+<div class="bg-white rounded-3xl p-10 premium-shadow border border-surface-container-highest text-center">
+<img id="upiQrCode" alt="Tanna Dental UPI QR Code" class="mx-auto w-64 h-64 object-contain" loading="lazy"/>
+<p class="text-on-surface-variant font-body-md mt-6">Scan to pay with any UPI app</p>
+</div>
+<div class="bg-white rounded-3xl p-10 premium-shadow border border-surface-container-highest text-center md:text-left">
+<span class="material-symbols-outlined text-[40px] text-primary mb-4">payments</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Our UPI ID</h3>
+<div class="flex flex-col sm:flex-row items-center justify-center md:justify-between gap-3 bg-surface-container rounded-xl px-4 py-3 mb-6">
+<span id="upiIdText" class="font-headline-md text-[18px] font-bold text-primary break-all">drdineshtanna79@okhdfcbank</span>
+<button id="upiCopyBtn" onclick="copyUpiId()" class="flex items-center gap-1 bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">content_copy</span> Copy
+</button>
+</div>
+<p class="text-on-surface-variant font-body-md">After payment, please share the transaction reference or screenshot with us so we can confirm your booking.</p>
+</div>
+</div>
+</div>
+</section>
+
 <!-- Trust / CTA Banner Section -->
 <section class="max-w-container-max mx-auto px-margin-desktop mb-section-gap">
 <div class="bg-primary rounded-3xl p-16 md:p-24 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
@@ -786,7 +814,9 @@ async function loadContactDetails() {
     return;
   }
 
-  footerList.innerHTML = data.map(contact => `
+  footerList.innerHTML = data
+    .filter(contact => contact.type !== "upi")
+    .map(contact => `
     <li class="flex items-start gap-3 text-on-surface-variant">
       <span class="material-symbols-outlined text-secondary">${contactIcon(contact.type)}</span>
       ${contactHref(contact)
@@ -802,6 +832,7 @@ function contactHref(contact) {
   if (contact.type === "phone") return `tel:${value.replace(/[^+\d]/g, "")}`;
   if (contact.type === "whatsapp") return `https://wa.me/${value.replace(/\D/g, "")}`;
   if (contact.type === "email") return `mailto:${value}`;
+  if (contact.type === "upi") return `upi://pay?pa=${encodeURIComponent(value)}&pn=Tanna%20Dental`;
   if (contact.type === "instagram" || contact.type === "link") return value.startsWith("http") ? value : `https://${value}`;
   return "";
 }
@@ -818,8 +849,55 @@ function contactIcon(type) {
     instagram: "photo_camera",
     address: "location_on",
     hours: "schedule",
-    link: "link"
+    link: "link",
+    upi: "payments"
   })[type] || "contact_phone";
+}
+
+async function loadPaymentInfo() {
+  const qrEl = document.getElementById("upiQrCode");
+  const idEl = document.getElementById("upiIdText");
+  if (!qrEl && !idEl) return;
+  let upiId = "drdineshtanna79@okhdfcbank";
+  try {
+    const { data, error } = await supabaseClient
+      .from("contact_details")
+      .select("value")
+      .eq("type", "upi")
+      .eq("is_active", true)
+      .order("display_order", { ascending: true })
+      .limit(1);
+    if (!error && data && data.length > 0 && data[0].value) upiId = String(data[0].value).trim();
+  } catch (e) { console.warn("Could not load UPI ID:", e); }
+  if (idEl) idEl.textContent = upiId;
+  if (qrEl) {
+    qrEl.src = "https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=10&qzone=2&data=" +
+      encodeURIComponent(`upi://pay?pa=${upiId}&pn=Tanna Dental`);
+  }
+}
+
+async function copyUpiId() {
+  const text = document.getElementById("upiIdText").textContent || "";
+  const btn = document.getElementById("upiCopyBtn");
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    if (btn) {
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Copied!';
+      setTimeout(() => { btn.innerHTML = original; }, 2000);
+    }
+  } catch (e) { console.warn("Copy failed:", e); }
 }
 
 renderTreatments();
@@ -827,6 +905,7 @@ loadGallery();
 loadContactDetails();
 loadHomeTestimonials();
 loadTeamMembers();
+loadPaymentInfo();
 
 </script>
 <script src="pwa.js"></script>

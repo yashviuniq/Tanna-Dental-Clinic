@@ -278,7 +278,9 @@ async function loadContactDetails() {
     .order("created_at", { ascending: true });
   if (error) { if (error) console.warn("Could not load contact details:", error.message); return; }
   if (!data || data.length === 0) { footerList.innerHTML = ""; return; }
-  footerList.innerHTML = data.map(contact => `
+  footerList.innerHTML = data
+    .filter(contact => contact.type !== "upi")
+    .map(contact => `
     <li class="flex items-start gap-3 text-on-surface-variant">
       <span class="material-symbols-outlined text-secondary">${contactIcon(contact.type)}</span>
       ${contactHref(contact) ? `<a class="hover:text-secondary transition-colors break-all" href="${escapeHtml(contactHref(contact))}" ${contactTarget(contact.type)}>${escapeHtml(contact.display_text || contact.value)}</a>` : `<span class="break-words">${escapeHtml(contact.display_text || contact.value)}</span>`}
@@ -291,11 +293,12 @@ function contactHref(contact) {
   if (contact.type === "phone") return `tel:${value.replace(/[^+\d]/g, "")}`;
   if (contact.type === "whatsapp") return `https://wa.me/${value.replace(/\D/g, "")}`;
   if (contact.type === "email") return `mailto:${value}`;
+  if (contact.type === "upi") return `upi://pay?pa=${encodeURIComponent(value)}&pn=Tanna%20Dental`;
   if (contact.type === "instagram" || contact.type === "link") return value.startsWith("http") ? value : `https://${value}`;
   return "";
 }
 function contactTarget(type) { return ["instagram", "link", "whatsapp"].includes(type) ? 'target="_blank" rel="noopener"' : ""; }
-function contactIcon(type) { return ({ phone: "call", whatsapp: "chat", email: "mail", instagram: "photo_camera", address: "location_on", hours: "schedule", link: "link" })[type] || "contact_phone"; }
+function contactIcon(type) { return ({ phone: "call", whatsapp: "chat", email: "mail", instagram: "photo_camera", address: "location_on", hours: "schedule", link: "link", upi: "payments" })[type] || "contact_phone"; }
 function escapeHtml(value) { return String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char])); }
 
 loadTestimonials();
