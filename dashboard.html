@@ -739,7 +739,7 @@ async function loadTeamMembers() {
   }
   grid.innerHTML = data.map(m => `
     <div class="bg-white rounded-2xl p-6 premium-shadow border border-surface-container-highest text-center">
-      <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold text-2xl mx-auto mb-4">${m.name.charAt(0).toUpperCase()}</div>
+      <div class="w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold text-3xl mx-auto mb-4 overflow-hidden">${m.photo_url ? `<img src="${escapeHtml(m.photo_url)}" alt="${escapeHtml(m.name)}" class="w-full h-full object-cover"/>` : m.name.charAt(0).toUpperCase()}</div>
       <h3 class="font-headline-md text-[18px] font-bold text-primary mb-1">${escapeHtml(m.name)}${m.is_visiting ? ' <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-blue-50 text-blue-700 align-middle">Visiting Doctor</span>' : ''}</h3>
       ${m.qualification ? `<p class="text-sm font-semibold text-secondary mb-1">${escapeHtml(m.qualification)}</p>` : ''}
       ${m.experience ? `<p class="text-sm text-on-surface-variant mb-1"><span class="material-symbols-outlined text-[16px] align-text-bottom">workspace_premium</span> ${escapeHtml(m.experience)}</p>` : ''}
