@@ -737,15 +737,18 @@ async function loadTeamMembers() {
     grid.innerHTML = `<div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3 xl:col-span-4"><span class="material-symbols-outlined text-[48px] opacity-30">groups</span><p class="mt-2 font-label-md text-label-md">No team members yet.</p></div>`;
     return;
   }
-  grid.innerHTML = data.map(m => `
+  grid.innerHTML = data.map(m => {
+    const photo = m.photo_url || (/dinesh tanna/i.test(m.name) ? "assets/dr-dinesh-tanna.jpeg" : "");
+    return `
     <div class="bg-white rounded-2xl p-6 premium-shadow border border-surface-container-highest text-center">
-      <div class="w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold text-3xl mx-auto mb-4 overflow-hidden">${m.photo_url ? `<img src="${escapeHtml(m.photo_url)}" alt="${escapeHtml(m.name)}" class="w-full h-full object-cover"/>` : m.name.charAt(0).toUpperCase()}</div>
+      <div class="w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold text-3xl mx-auto mb-4 overflow-hidden">${photo ? `<img src="${escapeHtml(photo)}" alt="${escapeHtml(m.name)}" class="w-full h-full object-cover"/>` : m.name.charAt(0).toUpperCase()}</div>
       <h3 class="font-headline-md text-[18px] font-bold text-primary mb-1">${escapeHtml(m.name)}${m.is_visiting ? ' <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-blue-50 text-blue-700 align-middle">Visiting Doctor</span>' : ''}</h3>
       ${m.qualification ? `<p class="text-sm font-semibold text-secondary mb-1">${escapeHtml(m.qualification)}</p>` : ''}
       ${m.experience ? `<p class="text-sm text-on-surface-variant mb-1"><span class="material-symbols-outlined text-[16px] align-text-bottom">workspace_premium</span> ${escapeHtml(m.experience)}</p>` : ''}
       ${m.mobile ? `<p class="text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px] align-text-bottom">call</span> <a class="hover:text-secondary transition-colors" href="tel:${escapeHtml(String(m.mobile).replace(/[^\d+]/g, ''))}">${escapeHtml(m.mobile)}</a></p>` : ''}
     </div>
-  `).join("");
+  `;
+  }).join("");
 }
 
 async function loadHomeTestimonials() {
