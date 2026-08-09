@@ -115,6 +115,14 @@ tailwind.config = {
         <span class="material-symbols-outlined text-[20px]">contact_phone</span>
         Contact Details
       </div>
+      <div class="sidebar-link" onclick="showSection('testimonials')">
+        <span class="material-symbols-outlined text-[20px]">star</span>
+        Testimonials
+      </div>
+      <div class="sidebar-link" onclick="showSection('team')">
+        <span class="material-symbols-outlined text-[20px]">groups</span>
+        Team Members
+      </div>
     </nav>
 
     <!-- Logout -->
@@ -153,7 +161,7 @@ tailwind.config = {
 
       <!-- DASHBOARD SECTION -->
       <div id="section-dashboard">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
           <div class="bg-white rounded-2xl p-5 card-shadow border border-surface-container-highest">
             <div class="w-10 h-10 bg-secondary-container rounded-xl flex items-center justify-center mb-3">
               <span class="material-symbols-outlined text-secondary text-[20px]">medical_services</span>
@@ -182,6 +190,20 @@ tailwind.config = {
             <p class="text-2xl font-heading font-bold text-primary" id="stat-pending">—</p>
             <p class="text-on-surface-variant text-xs mt-1 font-semibold uppercase tracking-wider">Pending</p>
           </div>
+          <div class="bg-white rounded-2xl p-5 card-shadow border border-surface-container-highest">
+            <div class="w-10 h-10 bg-secondary-container rounded-xl flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-secondary text-[20px]">star</span>
+            </div>
+            <p class="text-2xl font-heading font-bold text-primary" id="stat-testimonials">—</p>
+            <p class="text-on-surface-variant text-xs mt-1 font-semibold uppercase tracking-wider">Testimonials</p>
+          </div>
+          <div class="bg-white rounded-2xl p-5 card-shadow border border-surface-container-highest">
+            <div class="w-10 h-10 bg-secondary-container rounded-xl flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-secondary text-[20px]">groups</span>
+            </div>
+            <p class="text-2xl font-heading font-bold text-primary" id="stat-team">—</p>
+            <p class="text-on-surface-variant text-xs mt-1 font-semibold uppercase tracking-wider">Team Members</p>
+          </div>
         </div>
 
         <div class="bg-white rounded-2xl p-6 card-shadow border border-surface-container-highest">
@@ -202,6 +224,14 @@ tailwind.config = {
             <button onclick="showSection('contacts')" class="flex items-center gap-3 p-4 bg-surface-container-low hover:bg-secondary-container rounded-xl transition-colors text-left">
               <span class="material-symbols-outlined text-secondary">contact_phone</span>
               <span class="font-semibold text-sm text-on-surface">Manage Contact Details</span>
+            </button>
+            <button onclick="showSection('testimonials')" class="flex items-center gap-3 p-4 bg-surface-container-low hover:bg-secondary-container rounded-xl transition-colors text-left">
+              <span class="material-symbols-outlined text-secondary">star</span>
+              <span class="font-semibold text-sm text-on-surface">Manage Testimonials</span>
+            </button>
+            <button onclick="showSection('team')" class="flex items-center gap-3 p-4 bg-surface-container-low hover:bg-secondary-container rounded-xl transition-colors text-left">
+              <span class="material-symbols-outlined text-secondary">groups</span>
+              <span class="font-semibold text-sm text-on-surface">Manage Team</span>
             </button>
           </div>
         </div>
@@ -274,6 +304,46 @@ tailwind.config = {
                 </td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEAM SECTION -->
+      <div id="section-team" class="hidden">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="font-heading font-bold text-primary text-lg">Manage Team Members</h2>
+            <p class="text-on-surface-variant text-sm mt-0.5">Add, edit or remove team members shown on the website</p>
+          </div>
+          <button onclick="openTeamModal()" class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            Add Member
+          </button>
+        </div>
+        <div id="teamMembersList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div class="text-center py-12 text-on-surface-variant md:col-span-2 xl:col-span-3">
+            <span class="material-symbols-outlined text-[48px] opacity-30">groups</span>
+            <p class="mt-2 font-semibold">Loading team members...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TESTIMONIALS SECTION -->
+      <div id="section-testimonials" class="hidden">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="font-heading font-bold text-primary text-lg">Manage Testimonials</h2>
+            <p class="text-on-surface-variant text-sm mt-0.5">Add, edit or remove patient reviews shown on the website</p>
+          </div>
+          <button onclick="openTestimonialModal()" class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            Add Testimonial
+          </button>
+        </div>
+        <div id="testimonialsList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div class="text-center py-12 text-on-surface-variant md:col-span-2 xl:col-span-3">
+            <span class="material-symbols-outlined text-[48px] opacity-30">star</span>
+            <p class="mt-2 font-semibold">Loading testimonials...</p>
           </div>
         </div>
       </div>
@@ -372,6 +442,120 @@ tailwind.config = {
   </div>
 </div>
 
+<!-- TEAM MODAL -->
+<div id="teamModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4" style="display:none;">
+  <div class="bg-white rounded-2xl w-full max-w-lg card-shadow">
+    <div class="flex items-center justify-between p-6 border-b border-surface-container-highest">
+      <h3 class="font-heading font-bold text-primary text-lg" id="teamModalTitle">Add Team Member</h3>
+      <button onclick="closeTeamModal()" class="text-on-surface-variant hover:text-primary">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <input type="hidden" id="teamMemberId"/>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Name *</label>
+        <input id="teamMemberName" type="text" placeholder="e.g. Dr. Dinesh Tanna"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Qualification</label>
+        <input id="teamMemberQualification" type="text" placeholder="e.g. BDS, MDS"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Experience</label>
+        <input id="teamMemberExperience" type="text" placeholder="e.g. 20+ Years"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Mobile Number</label>
+        <input id="teamMemberMobile" type="text" placeholder="e.g. +91 98607 03424"
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <label class="flex items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 text-sm font-semibold text-on-surface-variant mb-4">
+        <input id="teamMemberVisiting" type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary"/>
+        Visiting Doctor
+        <span class="ml-auto text-xs font-medium text-on-surface-variant opacity-70">Shown on website with badge</span>
+      </label>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1">Display Order</label>
+          <input id="teamMemberOrder" type="number" min="0" value="0"
+            class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+        </div>
+        <label class="flex items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 text-sm font-semibold text-on-surface-variant">
+          <input id="teamMemberActive" type="checkbox" checked class="rounded border-outline-variant text-primary focus:ring-primary"/>
+          Visible on website
+        </label>
+      </div>
+      <div id="teamError" class="hidden bg-error-container text-on-error-container text-sm font-semibold px-4 py-3 rounded-xl"></div>
+    </div>
+    <div class="p-6 pt-0 flex gap-3">
+      <button onclick="closeTeamModal()" class="flex-1 h-11 border border-outline-variant rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+      <button onclick="saveTeamMember()" id="saveTeamMemberBtn" class="flex-1 h-11 bg-primary text-on-primary rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">Save Member</button>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL MODAL -->
+<div id="testimonialModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4" style="display:none;">
+  <div class="bg-white rounded-2xl w-full max-w-lg card-shadow">
+    <div class="flex items-center justify-between p-6 border-b border-surface-container-highest">
+      <h3 class="font-heading font-bold text-primary text-lg" id="testimonialModalTitle">Add Testimonial</h3>
+      <button onclick="closeTestimonialModal()" class="text-on-surface-variant hover:text-primary">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <input type="hidden" id="testimonialId"/>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Patient Name *</label>
+        <input id="testimonialName" type="text" placeholder="e.g. Rahul S."
+          class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Rating *</label>
+        <select id="testimonialRating" class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm">
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-on-surface-variant mb-1">Review Content *</label>
+        <textarea id="testimonialContent" rows="4" placeholder="Write the patient's review..."
+          class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm resize-none"></textarea>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1">Source</label>
+          <select id="testimonialSource" class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm">
+            <option value="manual">Manual / Patient</option>
+            <option value="google">Google Review</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-on-surface-variant mb-1">Display Order</label>
+          <input id="testimonialOrder" type="number" min="0" value="0"
+            class="w-full h-11 px-4 rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"/>
+        </div>
+      </div>
+      <label class="flex items-center gap-3 rounded-xl border border-outline-variant px-4 py-3 text-sm font-semibold text-on-surface-variant">
+        <input id="testimonialActive" type="checkbox" checked class="rounded border-outline-variant text-primary focus:ring-primary"/>
+        Visible on website
+      </label>
+      <div id="testimonialError" class="hidden bg-error-container text-on-error-container text-sm font-semibold px-4 py-3 rounded-xl"></div>
+    </div>
+    <div class="p-6 pt-0 flex gap-3">
+      <button onclick="closeTestimonialModal()" class="flex-1 h-11 border border-outline-variant rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+      <button onclick="saveTestimonial()" id="saveTestimonialBtn" class="flex-1 h-11 bg-primary text-on-primary rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">Save Testimonial</button>
+    </div>
+  </div>
+</div>
+
 <!-- CONTACT MODAL -->
 <div id="contactModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4" style="display:none;">
   <div class="bg-white rounded-2xl w-full max-w-lg card-shadow">
@@ -434,9 +618,9 @@ tailwind.config = {
 
 <script>
 // ─── NAVIGATION ───────────────────────────────────────────
-const sections = ['dashboard','services','gallery','appointments','contacts'];
-const titles = { dashboard:'Dashboard', services:'Services', gallery:'Gallery', appointments:'Appointments', contacts:'Contact Details' };
-const subtitles = { dashboard:'Welcome back, Admin', services:'Manage your clinic services', gallery:'Manage clinic photos', appointments:'View patient appointments', contacts:'Manage website contact information' };
+const sections = ['dashboard','services','gallery','appointments','contacts','testimonials','team'];
+const titles = { dashboard:'Dashboard', services:'Services', gallery:'Gallery', appointments:'Appointments', contacts:'Contact Details', testimonials:'Testimonials', team:'Team Members' };
+const subtitles = { dashboard:'Welcome back, Admin', services:'Manage your clinic services', gallery:'Manage clinic photos', appointments:'View patient appointments', contacts:'Manage website contact information', testimonials:'Manage patient reviews and testimonials', team:'Manage your clinic team members' };
 
 function showSection(name, trigger = null) {
   sections.forEach(s => {
@@ -455,6 +639,8 @@ function showSection(name, trigger = null) {
   if (name === 'gallery') loadGallery();
   if (name === 'appointments') loadAppointments();
   if (name === 'contacts') loadContacts();
+  if (name === 'testimonials') loadTestimonials();
+  if (name === 'team') loadTeamMembers();
   if (name === 'dashboard') loadStats();
 }
 
@@ -466,14 +652,18 @@ async function logout() {
 
 // ─── STATS ────────────────────────────────────────────────
 async function loadStats() {
-  const [s, g, a] = await Promise.all([
+  const [s, g, a, t, tm] = await Promise.all([
     supabaseClient.from('services').select('id', { count:'exact', head:true }),
     supabaseClient.from('gallery').select('id', { count:'exact', head:true }),
     supabaseClient.from('appointments').select('id', { count:'exact', head:true }),
+    supabaseClient.from('testimonials').select('id', { count:'exact', head:true }),
+    supabaseClient.from('team_members').select('id', { count:'exact', head:true }),
   ]);
   document.getElementById('stat-services').textContent = s.count ?? 0;
   document.getElementById('stat-gallery').textContent = g.count ?? 0;
   document.getElementById('stat-appointments').textContent = a.count ?? 0;
+  document.getElementById('stat-testimonials').textContent = t.count ?? 0;
+  document.getElementById('stat-team').textContent = tm.count ?? 0;
 
   const pending = await supabaseClient.from('appointments').select('id', { count:'exact', head:true }).eq('status','pending');
   document.getElementById('stat-pending').textContent = pending.count ?? 0;
@@ -1094,6 +1284,263 @@ async function updateStatus(id, status) {
 
 function normalizeAppointmentStatus(status) {
   return ['pending', 'confirmed', 'cancelled'].includes(status) ? status : 'pending';
+}
+
+// ─── TEAM MEMBERS ─────────────────────────────────────────
+let editingTeamMemberId = null;
+
+async function loadTeamMembers() {
+  const el = document.getElementById('teamMembersList');
+  const { data, error } = await supabaseClient
+    .from('team_members')
+    .select('*')
+    .order('display_order', { ascending: true })
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    el.innerHTML = `<div class="text-center py-12 text-error md:col-span-2 xl:col-span-3">
+      Failed to load team members: ${escapeHtml(error.message)}
+    </div>`;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant md:col-span-2 xl:col-span-3">
+      <span class="material-symbols-outlined text-[48px] opacity-30">groups</span>
+      <p class="mt-2 font-semibold">No team members yet</p>
+      <p class="text-sm opacity-70">Click "Add Member" to get started</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = data.map(m => {
+    const isActive = m.is_active !== false;
+    return `
+      <div class="bg-white rounded-2xl card-shadow border border-surface-container-highest p-5">
+        <div class="flex items-start justify-between gap-4 mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold text-lg">${m.name.charAt(0).toUpperCase()}</div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-heading font-bold text-primary text-base">${escapeHtml(m.name)}</h3>
+                ${m.is_visiting ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 whitespace-nowrap">Visiting Doctor</span>' : ''}
+              </div>
+              ${m.qualification ? `<p class="text-sm text-on-surface-variant">${escapeHtml(m.qualification)}</p>` : ''}
+            </div>
+          </div>
+          <span class="text-xs font-bold px-2 py-1 rounded-full ${isActive ? 'bg-green-100 text-green-800' : 'bg-surface-container text-on-surface-variant'}">
+            ${isActive ? 'Visible' : 'Hidden'}
+          </span>
+        </div>
+        <div class="space-y-1 text-sm text-on-surface-variant mb-3">
+          ${m.experience ? `<p><span class="font-semibold text-on-surface">Experience:</span> ${escapeHtml(m.experience)}</p>` : ''}
+          ${m.mobile ? `<p><span class="font-semibold text-on-surface">Mobile:</span> ${escapeHtml(m.mobile)}</p>` : ''}
+        </div>
+        <div class="flex gap-2">
+          <button onclick="editTeamMember('${m.id}')" class="flex-1 text-xs font-semibold py-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">Edit</button>
+          <button onclick="deleteTeamMember('${m.id}')" class="flex-1 text-xs font-semibold py-2 border border-error-container text-error rounded-lg hover:bg-error-container transition-colors">Delete</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openTeamModal(member = null) {
+  editingTeamMemberId = member?.id || null;
+  document.getElementById('teamMemberId').value = member?.id || '';
+  document.getElementById('teamMemberName').value = member?.name || '';
+  document.getElementById('teamMemberQualification').value = member?.qualification || '';
+  document.getElementById('teamMemberExperience').value = member?.experience || '';
+  document.getElementById('teamMemberMobile').value = member?.mobile || '';
+  document.getElementById('teamMemberOrder').value = member?.display_order ?? 0;
+  document.getElementById('teamMemberActive').checked = member?.is_active !== false;
+  document.getElementById('teamMemberVisiting').checked = member?.is_visiting === true;
+  document.getElementById('teamModalTitle').textContent = member ? 'Edit Team Member' : 'Add Team Member';
+  document.getElementById('teamError').classList.add('hidden');
+  document.getElementById('teamModal').style.display = 'flex';
+}
+
+async function editTeamMember(id) {
+  const { data, error } = await supabaseClient.from('team_members').select('*').eq('id', id).single();
+  if (error) { alert(error.message); return; }
+  openTeamModal(data);
+}
+
+function closeTeamModal() {
+  document.getElementById('teamModal').style.display = 'none';
+}
+
+async function saveTeamMember() {
+  const name = document.getElementById('teamMemberName').value.trim();
+  const qualification = document.getElementById('teamMemberQualification').value.trim();
+  const experience = document.getElementById('teamMemberExperience').value.trim();
+  const mobile = document.getElementById('teamMemberMobile').value.trim();
+  const displayOrder = Number(document.getElementById('teamMemberOrder').value || 0);
+  const isActive = document.getElementById('teamMemberActive').checked;
+  const isVisiting = document.getElementById('teamMemberVisiting').checked;
+  const btn = document.getElementById('saveTeamMemberBtn');
+  const errorEl = document.getElementById('teamError');
+
+  if (!name) { showFormError(errorEl, 'Name is required.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  errorEl.classList.add('hidden');
+
+  const payload = { name, qualification, experience, mobile, display_order: Number.isFinite(displayOrder) ? displayOrder : 0, is_active: isActive, is_visiting: isVisiting };
+
+  let error;
+  if (editingTeamMemberId) {
+    ({ error } = await supabaseClient.from('team_members').update(payload).eq('id', editingTeamMemberId));
+  } else {
+    ({ error } = await supabaseClient.from('team_members').insert(payload));
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Save Member';
+
+  if (error) { showFormError(errorEl, error.message); return; }
+  closeTeamModal();
+  loadTeamMembers();
+  loadStats();
+}
+
+async function deleteTeamMember(id) {
+  if (!confirm('Delete this team member?')) return;
+  await supabaseClient.from('team_members').delete().eq('id', id);
+  loadTeamMembers();
+  loadStats();
+}
+
+// ─── TESTIMONIALS ─────────────────────────────────────────
+let editingTestimonialId = null;
+
+async function loadTestimonials() {
+  const el = document.getElementById('testimonialsList');
+  const { data, error } = await supabaseClient
+    .from('testimonials')
+    .select('*')
+    .order('display_order', { ascending: true })
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    el.innerHTML = `<div class="text-center py-12 text-error md:col-span-2 xl:col-span-3">
+      Failed to load testimonials: ${escapeHtml(error.message)}
+    </div>`;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    el.innerHTML = `<div class="text-center py-12 text-on-surface-variant md:col-span-2 xl:col-span-3">
+      <span class="material-symbols-outlined text-[48px] opacity-30">star</span>
+      <p class="mt-2 font-semibold">No testimonials yet</p>
+      <p class="text-sm opacity-70">Click "Add Testimonial" to get started</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = data.map(t => {
+    const isActive = t.is_active !== false;
+    return `
+      <div class="bg-white rounded-2xl card-shadow border border-surface-container-highest p-5">
+        <div class="flex items-start justify-between gap-4 mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold">${t.patient_name.charAt(0).toUpperCase()}</div>
+            <div>
+              <h3 class="font-heading font-bold text-primary text-base">${escapeHtml(t.patient_name)}</h3>
+              <div class="flex gap-0.5">${renderStarsAdmin(t.rating)}</div>
+            </div>
+          </div>
+          <span class="text-xs font-bold px-2 py-1 rounded-full ${isActive ? 'bg-green-100 text-green-800' : 'bg-surface-container text-on-surface-variant'}">
+            ${isActive ? 'Visible' : 'Hidden'}
+          </span>
+        </div>
+        <p class="text-sm text-on-surface-variant mb-2 line-clamp-3">${escapeHtml(t.content)}</p>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs font-semibold px-2 py-1 rounded-full ${t.source === 'google' ? 'bg-blue-50 text-blue-700' : 'bg-secondary-container text-on-secondary-container'}">${t.source === 'google' ? 'Google' : 'Manual'}</span>
+          <span class="text-xs text-on-surface-variant">Order: ${t.display_order ?? 0}</span>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="editTestimonial('${t.id}')" class="flex-1 text-xs font-semibold py-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">Edit</button>
+          <button onclick="deleteTestimonial('${t.id}')" class="flex-1 text-xs font-semibold py-2 border border-error-container text-error rounded-lg hover:bg-error-container transition-colors">Delete</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderStarsAdmin(rating) {
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+    html += `<span class="material-symbols-outlined text-[16px]" style="color:${i <= rating ? '#f59e0b' : '#d1d5db'};font-variation-settings:'FILL' 1">star</span>`;
+  }
+  return html;
+}
+
+function openTestimonialModal(testimonial = null) {
+  editingTestimonialId = testimonial?.id || null;
+  document.getElementById('testimonialId').value = testimonial?.id || '';
+  document.getElementById('testimonialName').value = testimonial?.patient_name || '';
+  document.getElementById('testimonialRating').value = testimonial?.rating || 5;
+  document.getElementById('testimonialContent').value = testimonial?.content || '';
+  document.getElementById('testimonialSource').value = testimonial?.source || 'manual';
+  document.getElementById('testimonialOrder').value = testimonial?.display_order ?? 0;
+  document.getElementById('testimonialActive').checked = testimonial?.is_active !== false;
+  document.getElementById('testimonialModalTitle').textContent = testimonial ? 'Edit Testimonial' : 'Add Testimonial';
+  document.getElementById('testimonialError').classList.add('hidden');
+  document.getElementById('testimonialModal').style.display = 'flex';
+}
+
+async function editTestimonial(id) {
+  const { data, error } = await supabaseClient.from('testimonials').select('*').eq('id', id).single();
+  if (error) { alert(error.message); return; }
+  openTestimonialModal(data);
+}
+
+function closeTestimonialModal() {
+  document.getElementById('testimonialModal').style.display = 'none';
+}
+
+async function saveTestimonial() {
+  const name = document.getElementById('testimonialName').value.trim();
+  const rating = Number(document.getElementById('testimonialRating').value);
+  const content = document.getElementById('testimonialContent').value.trim();
+  const source = document.getElementById('testimonialSource').value;
+  const displayOrder = Number(document.getElementById('testimonialOrder').value || 0);
+  const isActive = document.getElementById('testimonialActive').checked;
+  const btn = document.getElementById('saveTestimonialBtn');
+  const errorEl = document.getElementById('testimonialError');
+
+  if (!name) { showFormError(errorEl, 'Patient name is required.'); return; }
+  if (!content) { showFormError(errorEl, 'Review content is required.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  errorEl.classList.add('hidden');
+
+  const payload = { patient_name: name, rating, content, source, display_order: Number.isFinite(displayOrder) ? displayOrder : 0, is_active: isActive };
+
+  let error;
+  if (editingTestimonialId) {
+    ({ error } = await supabaseClient.from('testimonials').update(payload).eq('id', editingTestimonialId));
+  } else {
+    ({ error } = await supabaseClient.from('testimonials').insert(payload));
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Save Testimonial';
+
+  if (error) { showFormError(errorEl, error.message); return; }
+  closeTestimonialModal();
+  loadTestimonials();
+  loadStats();
+}
+
+async function deleteTestimonial(id) {
+  if (!confirm('Delete this testimonial?')) return;
+  await supabaseClient.from('testimonials').delete().eq('id', id);
+  loadTestimonials();
+  loadStats();
 }
 
 // ─── HELPERS ──────────────────────────────────────────────

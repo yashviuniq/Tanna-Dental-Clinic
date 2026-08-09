@@ -167,6 +167,7 @@
 <a class="text-primary font-bold border-b-2 border-secondary font-label-md text-label-md py-1" href="#">Home</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#treatments">Treatments</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#gallery">Gallery</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="reviews.html">Reviews</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#team">Our Team</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="sign.html">Patient Portal (Login)</a>
 </nav>
@@ -298,49 +299,41 @@
 <!-- OUR TEAM SECTION -->
 <section id="team" class="py-section-gap bg-surface-bright scroll-mt-24">
 <div class="max-w-container-max mx-auto px-margin-desktop">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-<div class="relative overflow-hidden rounded-3xl premium-shadow bg-surface-container min-h-[420px]">
-<img class="absolute inset-0 w-full h-full object-cover" alt="Dr. Dinesh Tanna at Tanna Dental" src="assets/dr-dinesh-tanna.jpeg"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent"></div>
-<div class="absolute bottom-0 left-0 right-0 p-8 text-white">
-<p class="font-label-md text-label-md uppercase tracking-wide opacity-90">Lead Dentist</p>
-<h2 class="font-headline-lg text-headline-lg mt-2">Dr. Dinesh Tanna</h2>
+<div class="text-center mb-16">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">Our Team</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Care Led by Experience</h2>
+<p class="text-on-surface-variant font-body-lg max-w-2xl mx-auto">Meet our dedicated team of dental professionals committed to your oral health.</p>
 </div>
-</div>
-<div>
-<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">
-                    Our Team
-                </span>
-<h2 class="font-headline-lg text-headline-lg text-primary mb-5">Care Led by Experience</h2>
-<p class="text-on-surface-variant font-body-lg mb-8">
-                    Dr. Dinesh Tanna brings 20+ years of experience in dentistry, with a focus on careful diagnosis, practical treatment planning, and patient comfort.
-                </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
-<span class="material-symbols-outlined text-secondary text-[28px] mb-3">workspace_premium</span>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">20+ Years</h3>
-<p class="text-on-surface-variant font-body-md">Clinical dental experience.</p>
-</div>
-<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
-<span class="material-symbols-outlined text-secondary text-[28px] mb-3">diagnosis</span>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Oral Diagnosis</h3>
-<p class="text-on-surface-variant font-body-md">Examination-led treatment guidance.</p>
-</div>
-<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
-<span class="material-symbols-outlined text-secondary text-[28px] mb-3">health_and_safety</span>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Preventive Care</h3>
-<p class="text-on-surface-variant font-body-md">Hygiene and long-term oral health counseling.</p>
-</div>
-<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
-<span class="material-symbols-outlined text-secondary text-[28px] mb-3">sentiment_satisfied</span>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Patient Comfort</h3>
-<p class="text-on-surface-variant font-body-md">Clear communication before treatment.</p>
-</div>
-</div>
+<div id="teamMembersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3 xl:col-span-4">
+<span class="material-symbols-outlined text-[48px] opacity-30">groups</span>
+<p class="mt-2 font-label-md text-label-md">Loading team...</p>
 </div>
 </div>
 </div>
 </section>
+<!-- Reviews Section -->
+<section id="reviews" class="py-section-gap bg-surface-bright scroll-mt-24">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div class="max-w-xl">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">Patient Reviews</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">What Our Patients Say</h2>
+<p class="text-on-surface-variant font-body-lg">Real experiences from real patients who trust us with their smiles.</p>
+</div>
+<a class="text-primary font-bold font-label-md flex items-center gap-2 hover:text-secondary transition-colors" href="reviews.html">
+Read All Reviews <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div id="homeTestimonials" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="text-center py-12 text-on-surface-variant md:col-span-3">
+<span class="material-symbols-outlined text-[48px] opacity-30">star</span>
+<p class="mt-2 font-label-md text-label-md">Loading reviews...</p>
+</div>
+</div>
+</div>
+</section>
+
 <!-- Trust / CTA Banner Section -->
 <section class="max-w-container-max mx-auto px-margin-desktop mb-section-gap">
 <div class="bg-primary rounded-3xl p-16 md:p-24 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
@@ -431,6 +424,7 @@
 <h4 class="font-headline-md text-headline-md text-primary mb-8">Quick Links</h4>
 <ul class="space-y-4">
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#treatments">Treatments</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="reviews.html">Reviews</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#team">Our Team</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="sign.html">Patient Portal (Login)</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">FAQs</a></li>
@@ -702,6 +696,65 @@ function getGalleryOriginalUrl(storagePath) {
   return urlData.publicUrl;
 }
 
+async function loadTeamMembers() {
+  const grid = document.getElementById("teamMembersGrid");
+  if (!grid) return;
+  const { data, error } = await supabaseClient
+    .from("team_members")
+    .select("*")
+    .eq("is_active", true)
+    .order("display_order", { ascending: true })
+    .order("created_at", { ascending: false });
+  if (error || !data || data.length === 0) {
+    grid.innerHTML = `<div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3 xl:col-span-4"><span class="material-symbols-outlined text-[48px] opacity-30">groups</span><p class="mt-2 font-label-md text-label-md">No team members yet.</p></div>`;
+    return;
+  }
+  grid.innerHTML = data.map(m => `
+    <div class="bg-white rounded-2xl p-6 premium-shadow border border-surface-container-highest text-center">
+      <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold text-2xl mx-auto mb-4">${m.name.charAt(0).toUpperCase()}</div>
+      <h3 class="font-headline-md text-[18px] font-bold text-primary mb-1">${escapeHtml(m.name)}${m.is_visiting ? ' <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-blue-50 text-blue-700 align-middle">Visiting Doctor</span>' : ''}</h3>
+      ${m.qualification ? `<p class="text-sm font-semibold text-secondary mb-1">${escapeHtml(m.qualification)}</p>` : ''}
+      ${m.experience ? `<p class="text-sm text-on-surface-variant mb-1"><span class="material-symbols-outlined text-[16px] align-text-bottom">workspace_premium</span> ${escapeHtml(m.experience)}</p>` : ''}
+      ${m.mobile ? `<p class="text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px] align-text-bottom">call</span> <a class="hover:text-secondary transition-colors" href="tel:${escapeHtml(String(m.mobile).replace(/[^\d+]/g, ''))}">${escapeHtml(m.mobile)}</a></p>` : ''}
+    </div>
+  `).join("");
+}
+
+async function loadHomeTestimonials() {
+  const grid = document.getElementById("homeTestimonials");
+  if (!grid) return;
+  const { data, error } = await supabaseClient
+    .from("testimonials")
+    .select("*")
+    .eq("is_active", true)
+    .order("display_order", { ascending: true })
+    .order("created_at", { ascending: false })
+    .limit(3);
+  if (error || !data || data.length === 0) {
+    grid.innerHTML = `<div class="text-center py-12 text-on-surface-variant md:col-span-3"><span class="material-symbols-outlined text-[48px] opacity-30">star</span><p class="mt-2 font-label-md text-label-md">No reviews yet.</p></div>`;
+    return;
+  }
+  grid.innerHTML = data.map(t => {
+    const stars = renderStars(t.rating);
+    const badge = t.source === "google"
+      ? `<span class="inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full bg-blue-50 text-blue-700"><span class="material-symbols-outlined text-[14px]">google</span>Google</span>`
+      : `<span class="inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined text-[14px]">verified</span>Patient</span>`;
+    return `<div class="bg-white rounded-2xl p-6 premium-shadow border border-surface-container-highest flex flex-col"><div class="flex items-center justify-between mb-4"><div class="flex items-center gap-2"><div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold font-headline-md">${t.patient_name.charAt(0).toUpperCase()}</div><div><p class="font-headline-md text-[16px] font-bold text-primary">${escapeHtml(t.patient_name)}</p>${badge}</div></div></div><div class="flex gap-0.5 mb-4">${stars}</div><p class="text-on-surface-variant font-body-md flex-1">${escapeHtml(t.content)}</p></div>`;
+  }).join("");
+}
+
+function renderStars(rating) {
+  let html = "";
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      html += `<span class="material-symbols-outlined text-[20px]" style="color:#f59e0b;font-variation-settings:'FILL' 1">star</span>`;
+    } else {
+      html += `<span class="material-symbols-outlined text-[20px]" style="color:#d1d5db;font-variation-settings:'FILL' 1">star</span>`;
+    }
+  }
+  return html;
+}
+
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, char => ({
     '&': '&amp;',
@@ -772,6 +825,8 @@ function contactIcon(type) {
 renderTreatments();
 loadGallery();
 loadContactDetails();
+loadHomeTestimonials();
+loadTeamMembers();
 
 </script>
 <script src="pwa.js"></script>

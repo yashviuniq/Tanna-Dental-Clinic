@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#000f22" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="Tanna Dental" name="apple-mobile-web-app-title"/>
+<link href="manifest.json" rel="manifest"/>
+<link href="assets/dr-dinesh-tanna.jpeg" rel="apple-touch-icon"/>
+<title>Reviews | Tanna Dental</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-bright": "#f8f9fc", "tertiary": "#060045", "surface-dim": "#d9dadd",
+        "surface-tint": "#49607e", "on-tertiary-fixed": "#0f0069",
+        "primary-fixed": "#d2e4ff", "on-tertiary-container": "#7f7bff",
+        "tertiary-container": "#150082", "surface": "#f8f9fc", "on-primary": "#ffffff",
+        "surface-container-lowest": "#ffffff", "surface-container-highest": "#e1e2e5",
+        "inverse-primary": "#b0c8eb", "secondary-fixed": "#e6deff",
+        "on-tertiary": "#ffffff", "on-error": "#ffffff", "surface-variant": "#e1e2e5",
+        "secondary-fixed-dim": "#cac1e8", "primary-container": "#0a2540",
+        "outline-variant": "#c4c6ce", "outline": "#74777e", "secondary": "#605a7c",
+        "surface-container": "#edeef1", "primary": "#000f22", "background": "#f8f9fc",
+        "surface-container-high": "#e7e8eb", "on-surface": "#191c1e",
+        "on-secondary-fixed-variant": "#484263", "surface-container-low": "#f2f3f6",
+        "on-secondary-container": "#615b7c", "on-primary-fixed-variant": "#314865",
+        "error": "#ba1a1a", "secondary-container": "#ded5fd", "on-background": "#191c1e",
+        "tertiary-fixed-dim": "#c3c0ff", "inverse-on-surface": "#f0f1f4",
+        "tertiary-fixed": "#e2dfff", "on-primary-fixed": "#001c37",
+        "on-primary-container": "#768dad", "on-secondary-fixed": "#1c1735",
+        "on-tertiary-fixed-variant": "#321ed2", "on-surface-variant": "#43474d",
+        "on-secondary": "#ffffff", "error-container": "#ffdad6",
+        "on-error-container": "#93000a", "primary-fixed-dim": "#b0c8eb",
+        "inverse-surface": "#2e3133"
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+      spacing: { "section-gap": "120px", "margin-mobile": "16px", gutter: "24px", "container-max": "1280px", "margin-desktop": "64px", base: "8px" },
+      fontFamily: { "body-lg": ["Inter"], "label-md": ["Manrope"], "headline-lg-mobile": ["Manrope"], "headline-xl": ["Manrope"], "headline-md": ["Manrope"], "body-md": ["Inter"], "headline-lg": ["Manrope"] },
+      fontSize: { "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }], "label-md": ["14px", { lineHeight: "20px", fontWeight: "600" }], "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "600" }], "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }], "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }] }
+    }
+  }
+}
+</script>
+<style>
+.premium-shadow { box-shadow: 0px 4px 20px rgba(10, 37, 64, 0.05); }
+@media (max-width: 767px) {
+  html, body { max-width: 100%; overflow-x: hidden; }
+  .px-margin-desktop { padding-left: 16px !important; padding-right: 16px !important; }
+  .py-section-gap { padding-top: 64px !important; padding-bottom: 64px !important; }
+  .text-headline-xl { font-size: 34px !important; line-height: 42px !important; letter-spacing: 0 !important; }
+  .text-headline-lg { font-size: 28px !important; line-height: 36px !important; letter-spacing: 0 !important; }
+  .text-headline-md { font-size: 20px !important; line-height: 28px !important; }
+  .text-body-lg { font-size: 16px !important; line-height: 25px !important; }
+}
+.star-filled { color: #f59e0b; }
+.star-empty { color: #d1d5db; }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-sm h-20 transition-all duration-300">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-full">
+<div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='dashboard.html'">
+<img alt="Tanna Dental Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGQhBRZKMZ-rWj5MoTjsGsIBKl6zN78QLvBVY60anNvtGCQPIDCuwYGThnh3jGf4_D6cReRP0oaH5aBiNJ3gsiTu4aqN44sz3EmIlz_jHFyethtztYnZNm3MmB8djrxSTSrmGr1BQwiLkSJr00mSrlQAUy0_MBXOkSe4vYDSKVLc_QNMQTIfnX-3sA9lGwNX0IEYUxXngVFlBjm9MpDmIsb_8w1TG1SbTAsSrZUpOAa0rtz5Qq2F_ze5gV3T5W-TIWlI3IK91XPIo"/>
+<span class="text-lg sm:text-headline-md font-headline-md font-bold text-primary">Tanna Dental</span>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="dashboard.html">Home</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="dashboard.html#treatments">Treatments</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="dashboard.html#gallery">Gallery</a>
+<a class="text-primary font-bold border-b-2 border-secondary font-label-md text-label-md py-1" href="reviews.html">Reviews</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="dashboard.html#team">Our Team</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="sign.html">Patient Portal (Login)</a>
+</nav>
+<button class="hidden sm:block bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95" onclick="window.location.href='appointment.html'">
+Book Appointment
+</button>
+</div>
+</header>
+
+<!-- Hero Section -->
+<section class="relative pt-20 pb-12 md:pb-20 overflow-hidden bg-surface-bright">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-16 text-center">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">Patient Reviews</span>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-5 leading-tight">What Our Patients Say</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Real experiences from real patients. We take pride in delivering exceptional dental care.</p>
+</div>
+</section>
+
+<!-- Google Reviews Embed Section -->
+<section class="py-section-gap bg-surface">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Google Reviews</h2>
+<p class="text-on-surface-variant font-body-lg">See what patients are saying on Google</p>
+</div>
+<div class="max-w-3xl mx-auto">
+<div id="googleReviewWidget" class="bg-white rounded-2xl premium-shadow border border-surface-container-highest p-6 text-center">
+<p class="text-on-surface-variant mb-4">Loading Google Reviews...</p>
+<div class="flex justify-center items-center gap-1 mb-4">
+<span class="material-symbols-outlined star-filled text-[32px]" style="font-variation-settings:'FILL' 1">star</span>
+<span class="material-symbols-outlined star-filled text-[32px]" style="font-variation-settings:'FILL' 1">star</span>
+<span class="material-symbols-outlined star-filled text-[32px]" style="font-variation-settings:'FILL' 1">star</span>
+<span class="material-symbols-outlined star-filled text-[32px]" style="font-variation-settings:'FILL' 1">star</span>
+<span class="material-symbols-outlined star-filled text-[32px]" style="font-variation-settings:'FILL' 1">star</span>
+</div>
+<p class="font-headline-md text-headline-md text-primary mb-2">5.0 Rating</p>
+<p class="text-on-surface-variant mb-6">Based on patient reviews</p>
+<a href="https://search.google.com/local/writereview?placeid=ChIJbQlnS6nH1DsR7dzOwbbu3qs" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">rate_review</span>
+Leave a Google Review
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Manual Testimonials Section -->
+<section id="testimonials" class="py-section-gap bg-surface-bright">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">Testimonials</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Stories from Our Patients</h2>
+<p class="text-on-surface-variant font-body-lg max-w-2xl mx-auto">Every smile tells a story. Here are some kind words from our patients.</p>
+</div>
+<div id="testimonialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="text-center py-12 text-on-surface-variant md:col-span-2 lg:col-span-3">
+<span class="material-symbols-outlined text-[48px] opacity-30">star</span>
+<p class="mt-2 font-label-md text-label-md">Loading testimonials...</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-section-gap bg-primary">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="font-headline-xl text-headline-xl text-on-primary mb-6">Ready to Share Your Experience?</h2>
+<p class="font-body-lg text-body-lg text-on-primary-container mb-10 max-w-xl mx-auto">We value your feedback. Leave us a review and help others discover premium dental care.</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<a href="https://search.google.com/local/writereview?placeid=ChIJbQlnS6nH1DsR7dzOwbbu3qs" target="_blank" rel="noopener" class="bg-white text-primary px-10 py-4 rounded-full font-headline-md text-headline-md font-bold shadow-xl hover:scale-105 transition-transform active:scale-95">
+Write a Google Review
+</a>
+<a href="appointment.html" class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-full font-headline-md text-headline-md font-bold hover:opacity-90 transition-opacity">
+Book an Appointment
+</a>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-surface-container py-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-8">
+<img alt="Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBce-d0y1xv9RNkJWUUg2exbCPB30DMWHHLKgNDPePtK7FTjUj2wQ-LExFxrfUbGRpyH-UOxud1JSU4P7iYG1yF1MUeAcrZlR8DFnffiQh_FNTm0ziYfPct4gKOHx_Hog6FJs1keVQ0ZbRTCMhK8v6kfVDSmCuyVS7brs92qdJQFKzUCjBP0cpcJ7nSJfxdizn2NBWfEk1urzxftJvRemmraJPDEhznNqgB6Sn9fGO2WV93sX_udg1pW-oh75jB0lXtOq4KgMQ-4z0"/>
+<span class="text-headline-md font-headline-md font-bold text-primary">Tanna Dental</span>
+</div>
+<p class="text-on-surface-variant font-body-md mb-8">Clinical Excellence in Dentistry. Redefining your oral health journey with care and precision.</p>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-8">Contact Us</h4>
+<ul class="space-y-4" id="footerContactList">
+<li class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span>Nagpur, Maharashtra</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">call</span>
+<a class="hover:text-secondary transition-colors" href="tel:+917123573986">+91 712 357 3986</a>
+</li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+<span>Mon-Fri: Morning 10:30AM - 2PM <br/> Evening 6:00PM - 8:30PM<br/>Sun: Closed</span>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-8">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="dashboard.html">Home</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="dashboard.html#treatments">Treatments</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="reviews.html">Reviews</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="sign.html">Patient Portal (Login)</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-8">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Terms of Service</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Accessibility</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">Sitemap</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-20 pt-8 border-t border-surface-container-highest">
+<p class="text-on-surface-variant font-body-md text-center opacity-70">© 2024 Tanna Dental Clinic. Clinical Excellence in Dentistry. All rights reserved.</p>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script>
+async function loadTestimonials() {
+  const grid = document.getElementById("testimonialsGrid");
+  if (!grid) return;
+
+  const { data, error } = await supabaseClient
+    .from("testimonials")
+    .select("*")
+    .eq("is_active", true)
+    .order("display_order", { ascending: true })
+    .order("created_at", { ascending: false });
+
+  if (error || !data || data.length === 0) {
+    grid.innerHTML = `
+      <div class="text-center py-12 text-on-surface-variant md:col-span-2 lg:col-span-3">
+        <span class="material-symbols-outlined text-[48px] opacity-30">star</span>
+        <p class="mt-2 font-label-md text-label-md">No testimonials yet.</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = data.map(t => {
+    const stars = renderStars(t.rating);
+    const badge = t.source === "google"
+      ? `<span class="inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full bg-blue-50 text-blue-700"><span class="material-symbols-outlined text-[14px]">google</span>Google</span>`
+      : `<span class="inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined text-[14px]">verified</span>Patient</span>`;
+    return `
+      <div class="bg-white rounded-2xl p-6 premium-shadow border border-surface-container-highest flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold font-headline-md">
+              ${t.patient_name.charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <p class="font-headline-md text-[16px] font-bold text-primary">${escapeHtml(t.patient_name)}</p>
+              ${badge}
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-0.5 mb-4">${stars}</div>
+        <p class="text-on-surface-variant font-body-md flex-1">${escapeHtml(t.content)}</p>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderStars(rating) {
+  let html = "";
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      html += `<span class="material-symbols-outlined text-[20px] star-filled" style="font-variation-settings:'FILL' 1">star</span>`;
+    } else {
+      html += `<span class="material-symbols-outlined text-[20px] star-empty" style="font-variation-settings:'FILL' 1">star</span>`;
+    }
+  }
+  return html;
+}
+
+async function loadContactDetails() {
+  const footerList = document.getElementById("footerContactList");
+  if (!footerList) return;
+  const { data, error } = await supabaseClient
+    .from("contact_details")
+    .select("*")
+    .eq("is_active", true)
+    .order("display_order", { ascending: true })
+    .order("created_at", { ascending: true });
+  if (error) { if (error) console.warn("Could not load contact details:", error.message); return; }
+  if (!data || data.length === 0) { footerList.innerHTML = ""; return; }
+  footerList.innerHTML = data.map(contact => `
+    <li class="flex items-start gap-3 text-on-surface-variant">
+      <span class="material-symbols-outlined text-secondary">${contactIcon(contact.type)}</span>
+      ${contactHref(contact) ? `<a class="hover:text-secondary transition-colors break-all" href="${escapeHtml(contactHref(contact))}" ${contactTarget(contact.type)}>${escapeHtml(contact.display_text || contact.value)}</a>` : `<span class="break-words">${escapeHtml(contact.display_text || contact.value)}</span>`}
+    </li>`).join("");
+}
+
+function contactHref(contact) {
+  const value = String(contact.value || "").trim();
+  if (!value) return "";
+  if (contact.type === "phone") return `tel:${value.replace(/[^+\d]/g, "")}`;
+  if (contact.type === "whatsapp") return `https://wa.me/${value.replace(/\D/g, "")}`;
+  if (contact.type === "email") return `mailto:${value}`;
+  if (contact.type === "instagram" || contact.type === "link") return value.startsWith("http") ? value : `https://${value}`;
+  return "";
+}
+function contactTarget(type) { return ["instagram", "link", "whatsapp"].includes(type) ? 'target="_blank" rel="noopener"' : ""; }
+function contactIcon(type) { return ({ phone: "call", whatsapp: "chat", email: "mail", instagram: "photo_camera", address: "location_on", hours: "schedule", link: "link" })[type] || "contact_phone"; }
+function escapeHtml(value) { return String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char])); }
+
+loadTestimonials();
+loadContactDetails();
+</script>
+<script src="pwa.js"></script>
+</body></html>

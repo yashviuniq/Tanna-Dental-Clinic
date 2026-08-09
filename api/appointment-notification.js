@@ -60,7 +60,7 @@ async function sendEmailNotification(appointment) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = parseRecipients(
     process.env.ADMIN_EMAIL,
-    'drdineshtanna79@gmail.com,1675.yashvi@gmail.com'
+    'drdineshtanna@gmail.com,1675.yashvi@gmail.com'
   );
   const from = process.env.NOTIFICATION_FROM_EMAIL || 'Tanna Dental <onboarding@resend.dev>';
 
