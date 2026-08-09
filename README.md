@@ -70,7 +70,7 @@ Set these environment variables in Vercel:
 * `WHATSAPP_PHONE_NUMBER_ID` - Meta WhatsApp phone number ID
 * `WHATSAPP_API_VERSION` - optional Meta Graph API version, defaults to `v26.0`
 
-By default, notifications go to `drdineshtanna@gmail.com` and `1675.yashvi@gmail.com`, and WhatsApp `919860703424`, and WhatsApp `917820840535`. To change these later, set comma-separated `ADMIN_EMAIL` or `ADMIN_WHATSAPP_TO` values in Vercel.
+By default, notifications go to `drdineshtanna79@gmail.com` and `1675.yashvi@gmail.com`, and WhatsApp `919860703424`, and WhatsApp `917820840535`. To change these later, set comma-separated `ADMIN_EMAIL` or `ADMIN_WHATSAPP_TO` values in Vercel.
 
 After adding or changing Vercel environment variables, redeploy the project.
 
