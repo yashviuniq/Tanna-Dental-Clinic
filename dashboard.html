@@ -298,11 +298,52 @@
 </section>
 <!-- OUR TEAM SECTION -->
 <section id="team" class="py-section-gap bg-surface-bright scroll-mt-24">
-<div class="max-w-container-max mx-auto px-margin-desktop">
-<div class="text-center mb-16">
-<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">Our Team</span>
-<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Care Led by Experience</h2>
-<p class="text-on-surface-variant font-body-lg max-w-2xl mx-auto">Meet our dedicated team of dental professionals committed to your oral health.</p>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+<div class="relative overflow-hidden rounded-3xl premium-shadow bg-surface-container aspect-[3/4]" style="aspect-ratio:3/4; min-height:420px">
+<img class="absolute inset-0 w-full h-full object-cover" alt="Dr. Dinesh Tanna at Tanna Dental" src="assets/dr-dinesh-tanna.jpeg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent"></div>
+<div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+<p class="font-label-md text-label-md uppercase tracking-wide opacity-90">Lead Dentist</p>
+<h2 class="font-headline-lg text-headline-lg mt-2">Dr. Dinesh Tanna</h2>
+</div>
+</div>
+<div>
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">
+Our Team
+</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-5">Care Led by Experience</h2>
+<p class="text-on-surface-variant font-body-lg mb-8">
+Dr. Dinesh Tanna brings 20+ years of experience in dentistry, with a focus on careful diagnosis, practical treatment planning, and patient comfort.
+</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">workspace_premium</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">20+ Years</h3>
+<p class="text-on-surface-variant font-body-md">Clinical dental experience.</p>
+</div>
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">diagnosis</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Oral Diagnosis</h3>
+<p class="text-on-surface-variant font-body-md">Examination-led treatment guidance.</p>
+</div>
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">health_and_safety</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Preventive Care</h3>
+<p class="text-on-surface-variant font-body-md">Hygiene and long-term oral health counseling.</p>
+</div>
+<div class="bg-white rounded-2xl p-5 premium-shadow border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-[28px] mb-3">sentiment_satisfied</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Patient Comfort</h3>
+<p class="text-on-surface-variant font-body-md">Clear communication before treatment.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center mb-12">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">Team Members</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">The Rest of Our Team</h2>
+<p class="text-on-surface-variant font-body-lg max-w-2xl mx-auto">More specialists dedicated to your oral health.</p>
 </div>
 <div id="teamMembersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 <div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3 xl:col-span-4">
@@ -737,8 +778,10 @@ async function loadTeamMembers() {
     grid.innerHTML = `<div class="text-center py-12 text-on-surface-variant sm:col-span-2 lg:col-span-3 xl:col-span-4"><span class="material-symbols-outlined text-[48px] opacity-30">groups</span><p class="mt-2 font-label-md text-label-md">No team members yet.</p></div>`;
     return;
   }
-  grid.innerHTML = data.map(m => {
-    const photo = m.photo_url || (/dinesh tanna/i.test(m.name) ? "assets/dr-dinesh-tanna.jpeg" : "");
+  grid.innerHTML = data
+    .filter(m => !/dinesh tanna/i.test(m.name))
+    .map(m => {
+    const photo = m.photo_url || "";
     return `
     <div class="bg-white rounded-2xl p-6 premium-shadow border border-surface-container-highest text-center">
       <div class="w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center text-primary font-bold text-3xl mx-auto mb-4 overflow-hidden">${photo ? `<img src="${escapeHtml(photo)}" alt="${escapeHtml(m.name)}" class="w-full h-full object-cover"/>` : m.name.charAt(0).toUpperCase()}</div>
