@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en"><head>
 <meta charset="utf-8"/>
@@ -170,6 +170,7 @@
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#payment">Payment</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="reviews.html">Reviews</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#team">Our Team</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="#location">Location</a>
 <a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label-md text-label-md" href="sign.html">Patient Portal (Login)</a>
 </nav>
 <button class="hidden sm:block bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95" onclick="window.location.href='appointment.html'">
@@ -287,7 +288,7 @@
 <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A professional medical setting showing a consultation between a smiling dentist and a patient. They are looking at a digital tablet with high-resolution teeth scans. The room is brightly lit with warm, natural light pouring through large windows, creating a welcoming and modern clinical atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3V0zgJ-Ya3ss8Y1KSiRyd06-etUSbF4PSpHelozKe0FM_mBuRoGMGJwgltbzsmuj-SPGSylsd1V6lUa3czJdWkOL7jWWgiEqZIhlDytJLS6aLLy7TcDgiLMdOBj1B51QruEQA0rWj1ZbMv9gghzJZB7-ZZVCX1hvs9qMV1KJIx-baw4c1Y9E8xTkjoLjmKp-Bvdf2OWbxRR-17Wd0k5hf31bEgGqSHJQDzq9X2xrfiPd6tf6eYHNvf2Gu0oNnFCuW6wwY_tvLxr4"/>
 <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
 <div class="absolute bottom-0 left-0 p-10 text-white">
-<h4 class="font-headline-md text-headline-md mb-2">Invisalign®</h4>
+<h4 class="font-headline-md text-headline-md mb-2">InvisalignÂ®</h4>
 <p class="font-body-md opacity-90 max-w-sm mb-6">Straighten your teeth discreetly with the world's most advanced clear aligner system.</p>
 <button class="bg-white text-primary px-6 py-2 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-colors">Learn More</button>
 </div>
@@ -454,6 +455,85 @@ Read All Reviews <span class="material-symbols-outlined">arrow_forward</span>
   </div>
 
 </section>
+
+<!-- Location / Map Section -->
+<section id="location" class="py-section-gap bg-surface-bright scroll-mt-24">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+
+    <div class="text-center mb-16">
+      <span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md mb-4">
+        Find Us
+      </span>
+      <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Our Location</h2>
+      <p class="text-on-surface-variant font-body-lg max-w-2xl mx-auto">
+        Visit us at Telephone Exchange Square, Nagpur, Maharashtra. We are conveniently located and easy to find.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+
+      <!-- Map Embed -->
+      <div class="lg:col-span-2 rounded-3xl overflow-hidden premium-shadow border border-surface-container-highest" style="min-height:420px;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.3640270000003!2d79.0784!3d21.1466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0a9a5aaaaa3%3A0x1a2b3c4d5e6f7890!2sTelephone%20Exchange%20Square%2C%20Nagpur%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style="min-height:420px; border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Tanna Dental Clinic Location">
+        </iframe>
+      </div>
+
+      <!-- Info Card -->
+      <div class="flex flex-col gap-5">
+
+        <div class="bg-white rounded-3xl p-8 premium-shadow border border-surface-container-highest flex items-start gap-4">
+          <div class="w-12 h-12 bg-secondary-container rounded-2xl flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-secondary-container text-[24px]">location_on</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-1">Address</h3>
+            <p class="text-on-surface-variant font-body-md">Telephone Exchange Square,<br>Nagpur, Maharashtra, India</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 premium-shadow border border-surface-container-highest flex items-start gap-4">
+          <div class="w-12 h-12 bg-secondary-container rounded-2xl flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-secondary-container text-[24px]">call</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-1">Phone</h3>
+            <a href="tel:+917123573986" class="text-on-surface-variant font-body-md hover:text-secondary transition-colors">+91 712 357 3986</a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 premium-shadow border border-surface-container-highest flex items-start gap-4">
+          <div class="w-12 h-12 bg-secondary-container rounded-2xl flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-on-secondary-container text-[24px]">schedule</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-1">Clinic Hours</h3>
+            <p class="text-on-surface-variant font-body-md">
+              Mon–Fri: 10:30 AM – 2:00 PM<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:00 PM – 8:30 PM<br>
+              <span class="text-error font-semibold">Sunday: Closed</span>
+            </p>
+          </div>
+        </div>
+
+        <a href="https://www.google.com/maps/search/Tanna+Dental+Clinic+Nagpur" target="_blank" rel="noopener"
+           class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-4 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95">
+          <span class="material-symbols-outlined text-[20px]">open_in_new</span>
+          Open in Google Maps
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 <!-- Footer -->
 <footer class="bg-surface-container py-section-gap">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-desktop">
@@ -498,6 +578,7 @@ Read All Reviews <span class="material-symbols-outlined">arrow_forward</span>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#payment">Payment</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#team">Our Team</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="sign.html">Patient Portal (Login)</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#location">Location</a></li>
 <li><a class="text-on-surface-variant hover:text-secondary underline transition-all font-body-md" href="#">FAQs</a></li>
 </ul>
 </div>
@@ -513,7 +594,7 @@ Read All Reviews <span class="material-symbols-outlined">arrow_forward</span>
 </div>
 <div class="max-w-container-max mx-auto px-margin-desktop mt-20 pt-8 border-t border-surface-container-highest">
 <p class="text-on-surface-variant font-body-md text-center opacity-70">
-                © 2024 Tanna Dental Clinic. Clinical Excellence in Dentistry. All rights reserved.
+                Â© 2024 Tanna Dental Clinic. Clinical Excellence in Dentistry. All rights reserved.
             </p>
 </div>
 </footer>
